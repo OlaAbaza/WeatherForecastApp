@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/light_purple"
+    tools:context=".ScrollingActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/light_purple"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.WetherForecastApp.PopupOverlay" />
+               <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="parallax"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/main_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/white"
+                        android:textSize="60sp"
+                        android:text="19C°"
+                        tools:text="19°C" />
+                    <TextView
+                        android:id="@+id/main_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="Mostly cloudy"
+                        tools:text="Mostly cloudy" />
+                   <TextView
+                       android:id="@+id/main_view_country"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="8dp"
+                       android:layout_marginStart="10dp"
+                       android:layout_marginTop="25dp"
+                       android:includeFontPadding="false"
+                       android:textColor="@color/white"
+                       android:textSize="18sp"
+                       android:layout_gravity="center"
+                       android:text="Zagazig"
+                       tools:text="Zagazig" />
+                   <TextView
+                       android:id="@+id/main_view_data"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginBottom="8dp"
+                       android:layout_marginEnd="8dp"
+                       android:layout_marginStart="10dp"
+                       android:includeFontPadding="false"
+                       android:layout_marginTop="7dp"
+                       android:layout_gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="10sp"
+                       android:text="Fri, Nov 03, 2017"
+                       tools:text="Fri, Nov 03, 2017" />
+
+               </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/content_scrolling" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

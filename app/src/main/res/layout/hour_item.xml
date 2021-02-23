@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="5dp"
+    app:layoutDescription="@xml/hour_item_scene">
+
+    <TextView
+        android:id="@+id/dailyHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16:00"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"/>
+    <ImageView
+        android:id="@+id/dailyImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_wb_sunny_24"
+        />
+
+    <TextView
+        android:id="@+id/dailyTemb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="99°" />
+</LinearLayout>
