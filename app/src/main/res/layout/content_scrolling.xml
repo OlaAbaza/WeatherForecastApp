@@ -22,14 +22,15 @@
             android:orientation="horizontal"
             tools:listitem="@layout/hour_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="735dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:visibility="visible"
-            tools:listitem="@layout/day_item"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/day_item" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -271,7 +272,7 @@
                         android:id="@+id/SunsetTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clouds"
+                        android:text="Sunset"
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
                         android:textColor="@color/white"/>

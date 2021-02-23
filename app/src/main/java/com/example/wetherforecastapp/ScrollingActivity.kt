@@ -2,29 +2,34 @@ package com.example.wetherforecastapp
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.wetherforecastapp.databinding.ActivityScrollingBinding
-import com.example.wetherforecastapp.model.remote.Status
+import com.example.wetherforecastapp.model.entity.WeatherData
 import com.example.wetherforecastapp.model.remote.WeatherService
 
 class ScrollingActivity : AppCompatActivity() {
     lateinit var binding:ActivityScrollingBinding
     private lateinit var viewModel: MainViewModel
-    //private lateinit var adapter: MainAdapter
+   // private lateinit var adapter: MainAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_scrolling)
         binding = ActivityScrollingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //val viewModel = ViewModelProvider(this).get(WeatherRepository::class.java)
        // setSupportActionBar(binding.toolbar)
        // findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = ""
         setupViewModel()
-        setupObservers()
+       viewModel.loadWeather().observe(this, Observer<List<WeatherData>> { tasks -> updateList(tasks)
+       })
+
+       //setupObservers()
       /*  val response=WetherApi()
          GlobalScope.launch (Dispatchers.Main){
             val currentWeather = response.getCurrentWeatherByLatLng(33.441792,-94.037689)
@@ -32,7 +37,11 @@ class ScrollingActivity : AppCompatActivity() {
              Log.i("ola",currentWeather.toString())
          }*/
     }
+    private fun updateList(tasks: List<WeatherData>?) {
 
+        Toast.makeText(this, tasks.toString(), Toast.LENGTH_SHORT).show()
+
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_scrolling, menu)
@@ -52,8 +61,7 @@ class ScrollingActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(WeatherService.apiService)
-        ).get(MainViewModel::class.java)
+            ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(MainViewModel::class.java)
     }
 
     /*private fun setupUI() {
@@ -68,7 +76,7 @@ class ScrollingActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }*/
 
-    private fun setupObservers() {
+  /*  private fun setupObservers() {
         viewModel.getWeather().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
@@ -96,7 +104,7 @@ class ScrollingActivity : AppCompatActivity() {
                 }
             }
         })
-    }
+    }*/
 
    /* private fun retrieveList(users: List<User>) {
         adapter.apply {

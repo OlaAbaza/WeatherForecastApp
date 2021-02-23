@@ -1,6 +1,7 @@
 package com.example.wetherforecastapp.model.remote
 
 import com.example.wetherforecastapp.model.entity.WeatherData
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,7 +17,7 @@ interface WetherApi {
         @Query("lon") lon: Double,
         @Query("exclude") exclude: String = "minutely",
         @Query("appid") appid: String = API_KEY
-    ):WeatherData
+    ): Response<WeatherData>
     //suspend fun getCountries(): Response<List<WetherData>>
    /* companion object {
         operator fun invoke(): WetherApi {

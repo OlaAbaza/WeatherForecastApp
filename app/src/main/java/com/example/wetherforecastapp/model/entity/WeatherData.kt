@@ -20,5 +20,5 @@ data class WeatherData(
     @SerializedName("timezone_offset")
     val timezoneOffset: Int,
     @SerializedName("alerts")
-    val alerts: List<Alert>
+    val alerts: List<Alert>?
 )
