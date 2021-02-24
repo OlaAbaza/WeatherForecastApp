@@ -9,6 +9,10 @@ import androidx.room.TypeConverters
 import com.example.wetherforecastapp.model.entity.WeatherData
 
 
+
+
+
+
 @Database(entities = arrayOf(WeatherData::class), version = 1)
 @TypeConverters(Converters::class)
 abstract class WeatherDatabase : RoomDatabase() {
@@ -16,7 +20,6 @@ abstract class WeatherDatabase : RoomDatabase() {
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
-        // same time.
         @Volatile
         private var INSTANCE: WeatherDatabase? = null
 

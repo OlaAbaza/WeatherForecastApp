@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WetherForecastApp">
         <activity
-            android:name=".ScrollingActivity"
+            android:name=".View.ScrollingActivity"
             android:theme="@style/Theme.WetherForecastApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ScrollingActivity"
+    tools:context=".View.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:layout_height="1dp"
             android:background="@android:color/white"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHourly"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -24,6 +25,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDaily"
             android:layout_width="match_parent"
             android:layout_height="735dp"
             android:layout_marginTop="10dp"
