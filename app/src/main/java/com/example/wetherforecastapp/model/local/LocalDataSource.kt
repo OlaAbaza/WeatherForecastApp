@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.wetherforecastapp.model.entity.WeatherData
 
 class LocalDataSource {
-   lateinit var weatherDao: WeatherDao
+    var weatherDao: WeatherDao
 
 
     constructor(application: Application)  {

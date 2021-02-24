@@ -25,14 +25,14 @@ class HourlyListAdapter(var HourlyList: ArrayList<Hourly>) : RecyclerView.Adapte
         return VH(viewBinding)
     }
 
-    private fun getReminingTime(millisSeconds:Int ): String {
+    private fun timeFormat(millisSeconds:Int ): String {
         val calendar = Calendar.getInstance()
         calendar.setTimeInMillis((millisSeconds * 1000).toLong())
         val format = SimpleDateFormat("hh:00 aaa")
        return format.format(calendar.time)
     }
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.myView.Hour.text =getReminingTime(HourlyList[position].dt)
+        holder.myView.Hour.text =timeFormat(HourlyList[position].dt)
         holder.myView.hourlyTemb.text = HourlyList[position].temp.toInt().toString()+"°"
         Glide.with(holder.myView.hourlyImg.context).
         load(iconLinkgetter(HourlyList[position].weather.get(0).icon)).

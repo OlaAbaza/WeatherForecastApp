@@ -1,5 +1,6 @@
 package com.example.wetherforecastapp.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,10 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wetherforecastapp.FavoriteActivity
 import com.example.wetherforecastapp.ViewModel.MainViewModel
 import com.example.wetherforecastapp.R
+import com.example.wetherforecastapp.SettingsActivity
 import com.example.wetherforecastapp.databinding.ActivityScrollingBinding
 import com.example.wetherforecastapp.model.entity.WeatherData
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ScrollingActivity : AppCompatActivity() {
@@ -25,8 +29,9 @@ class ScrollingActivity : AppCompatActivity() {
        viewModel = ViewModelProviders.of(this,
            ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(
            MainViewModel::class.java)
-       // setSupportActionBar(binding.toolbar)
-       // findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = ""
+           setSupportActionBar(binding.toolbar)
+         binding.toolbarLayout.title=" "
+       // findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = theme.applyStyle()
         initUI()
         observeViewModel(viewModel)
     }
@@ -45,10 +50,10 @@ class ScrollingActivity : AppCompatActivity() {
     private fun observeViewModel(viewModel: MainViewModel) {
         //viewModel.loadingLiveData.observe(this, { showLoading(it) })
        // viewModel.errorLiveData.observe(this, { showError(it) })
-    viewModel.loadWeather().observe(this, { updateList(it) })
+    viewModel.loadWeather(applicationContext,33.441792,-94.037689).observe(this, { updateList(it) })
 
     }
-    private fun dateFormatter( milliSeconds:Int):String{
+    private fun dateFormat( milliSeconds:Int):String{
         // Create a calendar object that will convert the date and time value in milliseconds to date.
         val calendar: Calendar = Calendar.getInstance()
         calendar.setTimeInMillis(milliSeconds.toLong()*1000)
@@ -58,6 +63,12 @@ class ScrollingActivity : AppCompatActivity() {
         return day+month +year
 
     }
+    private fun timeFormat(millisSeconds:Int ): String {
+        val calendar = Calendar.getInstance()
+        calendar.setTimeInMillis((millisSeconds * 1000).toLong())
+        val format = SimpleDateFormat("hh:00 aaa")
+        return format.format(calendar.time)
+    }
     private fun updateList(items: List<WeatherData>?) {
         items?.let {
             for (item in items){
@@ -65,7 +76,14 @@ class ScrollingActivity : AppCompatActivity() {
                       binding.homeTemp.text= currentWether.temp.toInt().toString()+"°"
                       binding.homeDesc.text= currentWether.weather.get(0).description.toString()
                       binding.homeCountry.text= timezone
-                      binding.homedata.text= dateFormatter(currentWether.dt)
+                      binding.toolbarLayout.title=timezone
+                      binding.iContent.HumidityVal.text=currentWether.humidity.toString()
+                      binding.iContent.WindSpeedVal.text=currentWether.windSpeed.toString()
+                      binding.iContent.PressureVal.text=currentWether.pressure.toString()
+                      binding.iContent.CloudsVal.text=currentWether.clouds.toString()
+                      binding.iContent.SunriseVal.text=timeFormat(currentWether.sunrise)
+                      binding.iContent.SunsetVal.text=timeFormat(currentWether.sunset)
+                      binding.homedata.text= dateFormat(currentWether.dt)
                       dailyListAdapter.updateDaily(daily)
                       hourlyListAdapter.updateHours(hourly)
                   }
@@ -82,9 +100,17 @@ class ScrollingActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings ->{
+                val intent: Intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.action_fav -> {
+                val intent: Intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

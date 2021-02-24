@@ -1,0 +1,74 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    android:id="@+id/fav_item"
+    app:cardBackgroundColor="@color/light_purple"
+    app:backgroundTint="@null">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_purple"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="6">
+            <TextView
+                android:id="@+id/timezoneTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                tools:text="Cairo"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/locImg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/favDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="cloudy"
+                android:layout_marginEnd="5dp"
+                android:gravity="end"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/favTemb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="9°"
+                android:layout_marginEnd="5dp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
