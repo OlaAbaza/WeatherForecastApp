@@ -13,9 +13,6 @@ interface WeatherDao {
     @Query("SELECT * FROM weather")
     fun getAllData(): List<WeatherData>
 
-    @Query("SELECT * FROM weather where lat =:mlat and lat =:mlon ")
-    fun getWeatherByLatLon(mlat:Double,mlon:Double):WeatherData
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(weatherData: WeatherData)
 
@@ -31,7 +28,7 @@ interface WeatherDao {
     @Query("DELETE FROM weather WHERE timezone = :timezone")
     suspend fun deleteWeatherObj(timezone:String)
 
-    //////////////Alarm///////////////
+    //////////////Alarm/////////////////
     @Query("SELECT * FROM Alarms")
     fun getAllAlarms(): LiveData<List<Alarm>>
 

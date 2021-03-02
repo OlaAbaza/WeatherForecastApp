@@ -14,8 +14,8 @@ import com.example.wetherforecastapp.Utils.myAlarmReceiver
 import java.util.ArrayList
 
 class AlarmAdapter (var alarmList: ArrayList<Alarm>, alartViewModel: AlarmViewModel, context: Context) : RecyclerView.Adapter<AlarmAdapter.VH>() {
-    lateinit var context: Context
-    lateinit var alartViewModel: AlarmViewModel
+     var context: Context
+     var alartViewModel: AlarmViewModel
     init {
         this.context=context
         this.alartViewModel=alartViewModel

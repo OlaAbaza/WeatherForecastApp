@@ -1,7 +1,10 @@
 package com.example.wetherforecastapp
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,6 +14,7 @@ import androidx.preference.*
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.example.wetherforecastapp.ViewModel.SettingViewModel
 import com.example.wetherforecastapp.model.remote.Setting
+import java.util.*
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -84,8 +88,10 @@ class SettingsActivity : AppCompatActivity() {
                        editor.commit()
                    }
                     else {
+
                        val value = sharedPreferences?.getString(preference.key, "")
                        Log.i("ola",value+"ll")
+                      // activity?.let { it1 -> setLocale(it1,value) }
 
                     }
 
@@ -100,6 +106,14 @@ class SettingsActivity : AppCompatActivity() {
                 }
             }
         }
+       /* fun setLocale(activity: Activity, languageCode: String?) {
+            val locale = Locale(languageCode)
+            Locale.setDefault(locale)
+            val resources: Resources = activity.resources
+            val config: Configuration = resources.getConfiguration()
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.getDisplayMetrics())
+        }*/
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             preferenceScreen.sharedPreferences

@@ -27,7 +27,7 @@ class WorkManger(appContext: Context, workerParams: WorkerParameters):
         var unit=prefs.getString("UNIT_SYSTEM", Setting.IMPERIAL.Value).toString()
         var lang=prefs.getString("APP_LANG", Setting.ENGLISH.Value).toString()
         weatherRepository.UpdateWeatherData(applicationContext,lang,unit)
-        Log.i("ola","llllss")
+        Log.i("ola","WorkMangerstart")
         // Indicate whether the work finished successfully with the Result
         return Result.success()
     }

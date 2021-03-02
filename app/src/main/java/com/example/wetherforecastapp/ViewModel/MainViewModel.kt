@@ -17,9 +17,6 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
            weatherRepo = WeatherRepository(application)
        }
 
-      public fun loadWeather(context: Context,lat:Double,lon:Double,lang:String,unit:String) : LiveData<List<WeatherData>> {
-           return weatherRepo.fetchWeatherData(context,lat,lon,lang,unit)
-       }
 
       public fun loadWeatherObj(context: Context, lat: Double, lon:Double, lang:String, unit:String) : LiveData<WeatherData>{
              weatherRepo.fetchWeatherObj(context,lat,lon,lang,unit)

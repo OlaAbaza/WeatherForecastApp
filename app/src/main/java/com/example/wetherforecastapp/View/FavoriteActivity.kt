@@ -33,18 +33,14 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var viewModel: FavViewModel
     lateinit var binding: ActivityFavBinding
     lateinit var bindingDialog: FavDialogBinding
-    private lateinit var addBtn: FloatingActionButton
     lateinit var favoriteAdapter : FavoriteAdapter
     var dailyListAdapter = DailyListAdapter(arrayListOf())
     var hourlyListAdapter = HourlyListAdapter(arrayListOf())
-    lateinit var wifiManager: WifiManager
     lateinit var prefs: SharedPreferences
-    private val PLACE_PICKER_REQUEST = 999
 
     lateinit var dialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        wifiManager = this.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
         viewModel = ViewModelProvider(
@@ -77,8 +73,6 @@ class FavoriteActivity : AppCompatActivity() {
             intent.putExtra("mapId", 1)
             startActivity(intent)
             finish()
-           /*wifiManager.setWifiEnabled(false);
-           openPlacePicker();*/
         }
         viewModel.delObj().observe(this, Observer<String> { timeZone ->
             viewModel.deleteWeatherObj(timeZone)
@@ -90,20 +84,6 @@ class FavoriteActivity : AppCompatActivity() {
         })
 
 
-    }
-    private fun openPlacePicker() {
-        val builder = PlacePicker.IntentBuilder()
-        try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST)
-            //Enable Wifi
-            wifiManager.isWifiEnabled = true
-        } catch (e: GooglePlayServicesRepairableException) {
-            Log.d("Exception", e.message!!)
-            e.printStackTrace()
-        } catch (e: GooglePlayServicesNotAvailableException) {
-            Log.d("Exception", e.message!!)
-            e.printStackTrace()
-        }
     }
     private fun initUI() {
         binding.rvFavList.apply {
@@ -193,20 +173,4 @@ class FavoriteActivity : AppCompatActivity() {
             adapter = dailyListAdapter
         }
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                PLACE_PICKER_REQUEST -> {
-                    val place = PlacePicker.getPlace(this, data)
-                    val latitude = place.latLng.latitude
-                    val longitude = place.latLng.longitude
-                    val PlaceLatLng = "$latitude , $longitude"
-                    Toast.makeText(this, "you have arrived" + PlaceLatLng, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-   /* private fun updateList(it: List<WeatherData>) {}*/
 }

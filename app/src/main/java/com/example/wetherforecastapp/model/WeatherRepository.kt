@@ -18,21 +18,14 @@ import kotlinx.coroutines.*
 class WeatherRepository : ViewModel {
     var localDataSource: LocalDataSource
     var weatherService: WeatherService
-    val loadingLiveData = MutableLiveData<Boolean>()
-    var weatherObj=MutableLiveData<WeatherData>()
+    var weatherObj = MutableLiveData<WeatherData>()
 
     constructor(application: Application) {
         localDataSource = LocalDataSource(application)
         weatherService = WeatherService
     }
 
-
     fun fetchWeatherData(context: Context, lat: Double, lon: Double, lang: String, unit: String): LiveData<List<WeatherData>> {
-      //  loadingLiveData.postValue(true)
-        /* val exceptionHandlerException = CoroutineExceptionHandler { _, _ ->
-            errorLiveData.value = true
-            loadingLiveData.postValue(false)
-        }*/
         if (isOnline(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 val response =
@@ -48,21 +41,16 @@ class WeatherRepository : ViewModel {
         }
         return localDataSource.getData()
     }
-    fun fetchWeatherObj(context: Context, lat: Double, lon: Double, lang: String, unit: String){
-       // loadingLiveData.postValue(true)
-        /* val exceptionHandlerException = CoroutineExceptionHandler { _, _ ->
-            errorLiveData.value = true
-            loadingLiveData.postValue(false)
-        }*/
 
+    fun fetchWeatherObj(context: Context, lat: Double, lon: Double, lang: String, unit: String) {
         if (isOnline(context)) {
-          CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 val response = WeatherService.apiService.getCurrentWeatherByLatLng(lat, lon, lang, unit)
                 try {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                               localDataSource.insert(it)
-                               weatherObj.postValue(it)
+                            localDataSource.insert(it)
+                            weatherObj.postValue(it)
                         }
 
                     }
@@ -73,11 +61,8 @@ class WeatherRepository : ViewModel {
             }
         }
     }
-    fun UpdateWeatherData(context: Context,lang: String, unit: String){
-        /* val exceptionHandlerException = CoroutineExceptionHandler { _, _ ->
-            errorLiveData.value = true
-            loadingLiveData.postValue(false)
-        }*/
+
+    fun UpdateWeatherData(context: Context, lang: String, unit: String) {
         if (isOnline(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 var weatherData = localDataSource.getAll()
@@ -88,7 +73,7 @@ class WeatherRepository : ViewModel {
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 localDataSource.insert(it)
-                                Log.i("ola", "kkjhhf")
+                                Log.i("ola", "Up")
                             }
 
                         }
@@ -104,11 +89,7 @@ class WeatherRepository : ViewModel {
     fun getWeatherData(): LiveData<List<WeatherData>> {
         return localDataSource.getData()
     }
-    fun getWeatherByLatLon(lat:Double,lon:Double){
-        CoroutineScope(Dispatchers.IO).launch {
-            weatherObj.postValue(localDataSource.getWeatherByLatLon(lat, lon))
-        }
-    }
+
     fun getApiObj(timeZone: String): WeatherData {
         return localDataSource.getApiObj(timeZone)
     }

@@ -25,5 +25,7 @@
         <item>snow</item>
         <item>mist/fog</item>
         <item>thunderstorm</item>
+        <item>cloud</item>
+        <item>wend</item>
     </string-array>
 </resources>

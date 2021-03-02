@@ -16,10 +16,6 @@ class LocalDataSource {
     fun getData(): LiveData<List<WeatherData>> {
         return weatherDao.getWeatherData()
     }
-    fun getWeatherByLatLon(lat:Double,lon:Double): WeatherData{
-        return weatherDao.getWeatherByLatLon(lat,lon)
-    }
-
 
     fun getAll(): List<WeatherData> {
         return weatherDao.getAllData()

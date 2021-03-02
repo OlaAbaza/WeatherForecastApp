@@ -31,19 +31,11 @@ class AlarmActivity : AppCompatActivity() {
 
     private lateinit var viewModel: AlarmViewModel
     lateinit var binding: ActivityAlarmBinding
-    private lateinit var addBtn: FloatingActionButton
     lateinit var alertAdabter : AlarmAdapter
     lateinit var bindingDialog: AlarmDialogBinding
     lateinit var dialog: Dialog
-    lateinit var datePickerDialog: DatePickerDialog
-    lateinit var timePickerDialogfrom: TimePickerDialog
-    lateinit var timePickerDialogto: TimePickerDialog
     var calStart = Calendar.getInstance()
     var calEnd = Calendar.getInstance()
-    companion object{
-
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,59 +130,70 @@ class AlarmActivity : AppCompatActivity() {
 
             }
 
-            DatePickerDialog(this, dateSetListener,
-                calStart.get(Calendar.YEAR),
-                calStart.get(Calendar.MONTH),
-                calStart.get(Calendar.DAY_OF_MONTH)).show()
+            var datePickerDialog=DatePickerDialog(this, dateSetListener,
+                    calStart.get(Calendar.YEAR),
+                    calStart.get(Calendar.MONTH),
+                    calStart.get(Calendar.DAY_OF_MONTH)).show()
+            //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
 
         }
         bindingDialog.addAlarmBtn.setOnClickListener{
-            alarmObj.description=bindingDialog.DescribtionTv.text.toString()
-            alarmObj.event=getRepetation()
-            if(bindingDialog.loopSound.isChecked)
-                alarmObj.sound=false
-            else
-                alarmObj.sound = true
 
-            var id=0
-            var jop=CoroutineScope(Dispatchers.IO).launch {
-                id= viewModel.insertAlarmObj(alarmObj).toInt()
-                //handler.sendEmptyMessage(0)
+            if(calStart.timeInMillis<calEnd.timeInMillis) {
+                alarmObj.description = bindingDialog.DescribtionTv.text.toString()
+                alarmObj.event = getEvent()
+                if (bindingDialog.loopSound.isChecked)
+                    alarmObj.sound = false
+                else
+                    alarmObj.sound = true
+
+                var id = 0
+                var jop = CoroutineScope(Dispatchers.IO).launch {
+                    id = viewModel.insertAlarmObj(alarmObj).toInt()
+                    //handler.sendEmptyMessage(0)
+                }
+                jop.invokeOnCompletion { setAlarm(applicationContext, id, calStart, calEnd, alarmObj.event,alarmObj.sound) }
+
+
+            }else{
+                Toast.makeText(this, "Please Make Sure Your Timing is correct"  , Toast.LENGTH_LONG).show()
             }
-            jop.invokeOnCompletion { setAlarm(applicationContext,id,calStart,calEnd,alarmObj.event) }
-
             dialog.dismiss()
         }
         dialog.show()
     }
 
-    private fun setAlarm(context:Context,id:Int,calStart:Calendar,calEnd: Calendar,event:String) {
+    private fun setAlarm(context:Context,id:Int,calStart:Calendar,calEnd: Calendar,event:String,sound:Boolean) {
         Log.i("alarm","the first")
         val mIntent = Intent(context, myAlarmReceiver::class.java)
         mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         mIntent.putExtra("endTime",calEnd.timeInMillis)
         mIntent.putExtra("id",id)
         mIntent.putExtra("event",event)
+        mIntent.putExtra("sound",sound)
         val mPendingIntent = PendingIntent.getBroadcast(this, id, mIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         Log.i("cal",""+calStart)
         val mAlarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  calStart.timeInMillis,
-            2*1000, mPendingIntent)
+                2*1000, mPendingIntent)
         Log.i("alarm",""+calEnd)
     }
 
 
-    private fun getRepetation(): String {
-        var repetation = ""
+    private fun getEvent(): String {
+        var event = ""
+        var arr = this.resources.getStringArray(R.array.event_options)
         when (bindingDialog.eventSpinner.getSelectedItemPosition()) {
-            0 -> repetation = "rain"
-            1 -> repetation = "snow"
-            2 -> repetation = "clear"
-            3 -> repetation = "thunderstorm"
+            0 -> event = arr[0]
+            1 -> event = arr[1]
+            2 -> event = arr[2]
+            3 -> event = arr[3]
+            4 -> event = arr[4]
+            5 -> event = arr[5]
         }
-        return repetation
+        return event
     }
-
     private fun initUI() {
         binding.alarmList.apply {
             layoutManager = LinearLayoutManager(applicationContext)

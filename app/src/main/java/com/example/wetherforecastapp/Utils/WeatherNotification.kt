@@ -51,16 +51,25 @@ class WeatherNotification(base: Context?) : ContextWrapper(base) {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    fun getAndroidChannelNotification( title: String,body: String): NotificationCompat.Builder? {
-        val alertSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        return NotificationCompat.Builder(
-                getApplicationContext(),ANDROID_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setContentTitle(title)
-                .setContentText(body)
-                .setPriority(Notification.PRIORITY_HIGH)
-                // what works on tap notification .setContentIntent(start)
-                .setOngoing(false)
+    fun getAndroidChannelNotification( title: String,body: String,sound:Boolean): NotificationCompat.Builder? {
+        if (sound){
+            return NotificationCompat.Builder(
+                    getApplicationContext(),ANDROID_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setOngoing(false)
+        }else{
+            return NotificationCompat.Builder(
+                    getApplicationContext(),ANDROID_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setOngoing(false)
+        }
     }
 }

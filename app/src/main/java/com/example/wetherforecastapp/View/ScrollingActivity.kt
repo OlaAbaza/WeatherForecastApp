@@ -3,10 +3,13 @@ package com.example.wetherforecastapp.View
 import android.Manifest
 import android.provider.Settings
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -64,7 +67,6 @@ class ScrollingActivity : AppCompatActivity()  {
     var handler = Handler(Handler.Callback {
         Toast.makeText(applicationContext,"location:"+yourLocationLat+","+yourLocationLon,Toast.LENGTH_SHORT).show()
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val editor:SharedPreferences.Editor =  prefs.edit()
         editor.putString("lat", yourLocationLat.toString())
         editor.putString("lon", yourLocationLon.toString())
         editor.commit()
@@ -95,6 +97,7 @@ class ScrollingActivity : AppCompatActivity()  {
                MainViewModel::class.java)
            setSupportActionBar(binding.toolbar)
          binding.toolbarLayout.title=" "
+
        //findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = theme.applyStyle()
         val saveRequest =
                 PeriodicWorkRequest.Builder(WorkManger::class.java,15, TimeUnit.MINUTES)
@@ -115,7 +118,7 @@ class ScrollingActivity : AppCompatActivity()  {
         lat=prefs.getString("lat", ("")).toString()
         timezone=prefs.getString("timezone", ("")).toString()
         if(!timezone.isNullOrEmpty()) {
-             getObjByLatLon()
+            getObjByTimezone()
         }
 
         if(loc){
@@ -126,24 +129,14 @@ class ScrollingActivity : AppCompatActivity()  {
             observeViewModel(viewModel)
         }
 
-       /* val timeZone=intent.getStringExtra("timeZone")
-        if(!timeZone.isNullOrEmpty()){
-            Toast.makeText(this, "you have arrived" + timeZone, Toast.LENGTH_SHORT).show()
-        }
-        val findLocation=GPSLocation()
-        findLocation.findDeviceLocation(this)
-        Toast.makeText(this, "location:" + findLocation.getLatitude() + "," + findLocation.getLongitude(), Toast.LENGTH_SHORT).show()*/
     }
 
-    private fun getObjByLatLon() {
+    private fun getObjByTimezone() {
        Log.i("ola", "timezone"+timezone)
         CoroutineScope(Dispatchers.IO).launch {
            var weather= viewModel.getApiObj(timezone)
-            Log.i("ola", "weather"+weather)
             updateObj(weather)
         }
-
-
     }
 
     //-24.7847,-65.4315
@@ -178,28 +171,7 @@ class ScrollingActivity : AppCompatActivity()  {
         val format = SimpleDateFormat("hh:00 aaa")
         return format.format(calendar.time)
     }
-    private fun updateList(items: List<WeatherData>?) {
-        items?.let {
-            for (item in items){
-                  item.apply {
-                      binding.homeTemp.text= currentWether.temp.toInt().toString()+"°"
-                      binding.homeDesc.text= currentWether.weather.get(0).description.toString()
-                      binding.homeCountry.text= timezone
-                      binding.toolbarLayout.title=timezone
-                      binding.iContent.HumidityVal.text=currentWether.humidity.toString()
-                      binding.iContent.WindSpeedVal.text=currentWether.windSpeed.toString()
-                      binding.iContent.PressureVal.text=currentWether.pressure.toString()
-                      binding.iContent.CloudsVal.text=currentWether.clouds.toString()
-                      binding.iContent.SunriseVal.text=timeFormat(currentWether.sunrise)
-                      binding.iContent.SunsetVal.text=timeFormat(currentWether.sunset)
-                      binding.homedata.text= dateFormat(currentWether.dt)
-                      dailyListAdapter.updateDaily(daily)
-                      hourlyListAdapter.updateHours(hourly)
-                  }
-            }
-        }
 
-    }
     private fun updateObj(item: WeatherData) {
         item?.let {
                 item.apply {
@@ -220,7 +192,6 @@ class ScrollingActivity : AppCompatActivity()  {
             item.alerts?.let {
                 notifyUser(it)
             }
-
 
             editor.putString("timezone", item.timezone)
             editor.commit()
@@ -257,18 +228,15 @@ class ScrollingActivity : AppCompatActivity()  {
         }
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     private fun notifyUser(alert:List<Alert>){
         notificationUtils = WeatherNotification(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification(alert.get(0)?.event, ""
-                    +dateFormat(alert.get(0)?.start.toInt())+","+dateFormat(alert.get(0)?.end.toInt()) +"\n"+alert.get(0)?.description)
+                    +dateFormat(alert.get(0)?.start.toInt())+","+dateFormat(alert.get(0)?.end.toInt()) +"\n"+alert.get(0)?.description,true)
             notificationUtils.getManager()?.notify(3, nb?.build())
         }
     }
+    ///////////////////////////////////////////////////////
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         if (checkPermissions()) {
@@ -294,7 +262,6 @@ class ScrollingActivity : AppCompatActivity()  {
             requestPermissions()
         }
     }
-
     @SuppressLint("MissingPermission")
     private fun requestNewLocationData() {
         var mLocationRequest = LocationRequest()
@@ -319,7 +286,6 @@ class ScrollingActivity : AppCompatActivity()  {
             Toast.makeText(applicationContext,"location:"+yourLocationLat+","+yourLocationLon,Toast.LENGTH_SHORT).show()
         }
     }
-
     private fun isLocationEnabled(): Boolean {
         var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
@@ -347,7 +313,6 @@ class ScrollingActivity : AppCompatActivity()  {
             PERMISSION_ID
         )
     }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -355,18 +320,29 @@ class ScrollingActivity : AppCompatActivity()  {
             }
         }
     }
+    ////////////////////////////////////////////////////
 
+    fun setLocale(activity: Activity, languageCode: String?) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = activity.resources
+        val config: Configuration = resources.getConfiguration()
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.getDisplayMetrics())
+    }
     override fun onResume() {
         super.onResume()
         isUpdated=prefs.getBoolean("isUpdated", false)
         Log.i("ola"," "+isUpdated.toString()+"resume")
         if(isUpdated)
         {
+
             loc=prefs.getBoolean("USE_DEVICE_LOCATION", true)
             unit=prefs.getString("UNIT_SYSTEM", Setting.IMPERIAL.Value).toString()
             lang=prefs.getString("APP_LANG", Setting.ENGLISH.Value).toString()
             lon=prefs.getString("lon", ("")).toString()
             lat=prefs.getString("lat", ("")).toString()
+            setLocale(this,lang)
             if(loc){
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
                 getLastLocation()

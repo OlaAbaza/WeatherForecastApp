@@ -2,6 +2,7 @@ package com.example.wetherforecastapp.Utils
 
 import android.app.AlarmManager
 import android.app.Application
+import android.app.Notification.FLAG_INSISTENT
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -30,7 +31,9 @@ class myAlarmReceiver: BroadcastReceiver() {
         val c: Calendar = Calendar.getInstance()
         val LongEndTime = intent.getLongExtra("endTime", 0)
         var id = intent.getIntExtra("id", 0)
+        var sound=intent.getBooleanExtra("sound",true)
         Log.i("alarmID", "" + id)
+        Log.i("alarmٍSound", "" + sound)
         Log.i("alarm", " " + LongEndTime + "  " + c.timeInMillis)
         Toast.makeText(context, " " + LongEndTime + "  " + c.timeInMillis, Toast.LENGTH_SHORT).show()
         if (LongEndTime < c.timeInMillis) {
@@ -50,7 +53,7 @@ class myAlarmReceiver: BroadcastReceiver() {
                 val apiObj=localDataSource.getApiObj(timeZone)
                 val event = intent.getStringExtra("event")
                 if (apiObj.currentWether.weather.get(0).description.contains(event + "", ignoreCase = true)) {
-                    notifyUser(context,event+"",apiObj.currentWether.weather.get(0).description,id)
+                    notifyUser(context,event+"",apiObj.currentWether.weather.get(0).description,id,sound)
                 }
 
             }
@@ -69,12 +72,16 @@ class myAlarmReceiver: BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
     }
 
-
-    private fun notifyUser(context: Context, event: String,describtion:String,id: Int) {
+    private fun notifyUser(context: Context, event: String,describtion:String,id: Int,sound:Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification("Event: "+event, "Be aware there is " + describtion)
-            notificationUtils.getManager()?.notify(id, nb?.build())
+            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification("Event: "+event, "Be aware there is " + describtion,sound)
+            val notification=nb?.build()
+            if(!sound){
+                notification?.flags= FLAG_INSISTENT
+            }
+            notificationUtils.getManager()?.notify(id, notification)
         }
+
     }
 
 }
