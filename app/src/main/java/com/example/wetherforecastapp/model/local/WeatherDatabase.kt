@@ -6,18 +6,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.wetherforecastapp.model.entity.Alarm
 import com.example.wetherforecastapp.model.entity.WeatherData
 
-
-
-
-
-
-@Database(entities = arrayOf(WeatherData::class), version = 1)
+@Database(entities = arrayOf(WeatherData::class,Alarm::class), version = 1)
 @TypeConverters(Converters::class)
 abstract class WeatherDatabase : RoomDatabase() {
     abstract fun weatherDao():WeatherDao
-
     companion object {
         // Singleton prevents multiple instances of database opening at the
         @Volatile
@@ -38,5 +33,4 @@ abstract class WeatherDatabase : RoomDatabase() {
             }
         }
     }
-
 }

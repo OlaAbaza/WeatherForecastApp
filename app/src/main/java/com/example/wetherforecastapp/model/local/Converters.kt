@@ -4,8 +4,6 @@ import com.example.wetherforecastapp.model.entity.*
 import com.google.gson.Gson
 
 
-
-
 class Converters {
         @TypeConverter
         fun  listHourlyToJson (value:List<Hourly>) = Gson().toJson(value)
@@ -22,11 +20,10 @@ class Converters {
         @TypeConverter
         fun jsonToDailyList(value: String) = Gson().fromJson(value, Array<Daily>::class.java).toList()
         @TypeConverter
-        fun jsonToAlertList(value: String?): List<Alert> {
-            if(value.isNullOrEmpty())
-            return Gson().fromJson(value, Array<Alert>::class.java).toList()
-            else
-               return emptyList()
-
+        fun jsonToAlertList(value: String?): List<Alert>? {
+                value?.let {
+                        return Gson().fromJson(value, Array<Alert>::class.java)?.toList()
+                }
+                return emptyList()
         }
 }

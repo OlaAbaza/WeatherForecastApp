@@ -1,14 +1,17 @@
-package com.example.wetherforecastapp
+package com.example.wetherforecastapp.View
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wetherforecastapp.ViewModel.FavViewModel
 import com.example.wetherforecastapp.databinding.FavItemBinding
 import com.example.wetherforecastapp.model.entity.WeatherData
 import java.util.*
 
-class FavoriteAdapter(var FavList: ArrayList<WeatherData>,favoritesViewModel: FavViewModel,context: Context) : RecyclerView.Adapter<FavoriteAdapter.VH>() {
+class FavoriteAdapter(var FavList: ArrayList<WeatherData>, favoritesViewModel: FavViewModel, context: Context) : RecyclerView.Adapter<FavoriteAdapter.VH>() {
 
      var favoritesViewModel: FavViewModel
      var context: Context
@@ -34,6 +37,12 @@ class FavoriteAdapter(var FavList: ArrayList<WeatherData>,favoritesViewModel: Fa
         holder.myView.favDesc.text =FavList[position].currentWether.weather.get(0).description.toString()
         holder.myView.timezoneTxt.text = FavList[position].timezone
         holder.myView.favTemb.text = FavList[position].currentWether.temp.toInt().toString()+"°"
+        holder.myView.favItem.setOnClickListener {
+            favoritesViewModel.onShowClick(FavList[position])
+        }
+        holder.myView.locImg.setOnClickListener {
+            favoritesViewModel.onRemoveClick(FavList[position].timezone)
+        }
 
     }
 

@@ -22,4 +22,22 @@
     <style name="Theme.WetherForecastApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WetherForecastApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SettingsTheme" parent="Theme.AppCompat">
+        <!-- Override properties according to your need -->
+        <item name="android:colorBackground">#ffffff</item>
+        <!--switch close-->
+        <item name="android:colorForeground">#673AB7</item>
+        <item name="colorSecondary">@color/purple_200</item>
+        <item name="colorSecondaryVariant">#FF00DE</item>
+        <item name="colorOnSecondary">#CDDC39</item>
+
+        <!--titleText-->
+        <item name="android:textColorPrimary">#FBF7F7</item>
+        <!--summary check box border-->
+        <item name="android:textColorSecondary">#0000ff</item>
+        <item name="android:textColorTertiary">#00ff00</item>
+        <item name="android:textColorPrimaryDisableOnly">#03A9F4</item>
+        <item name="android:textColorHint">#FFEB3B</item>
+    </style>
 </resources>

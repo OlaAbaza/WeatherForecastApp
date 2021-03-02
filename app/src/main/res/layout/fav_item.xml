@@ -9,13 +9,13 @@
     android:layout_margin="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="8dp"
-    android:id="@+id/fav_item"
     app:cardBackgroundColor="@color/light_purple"
     app:backgroundTint="@null">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_purple"
+        android:id="@+id/fav_item"
         android:orientation="vertical">
         <View
             android:id="@+id/view"
@@ -39,12 +39,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/locImg"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/favDesc"
                 android:layout_width="wrap_content"
@@ -68,7 +63,13 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-
         </LinearLayout>
+        <ImageView
+            android:id="@+id/locImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_wb_sunny_24"
+            android:layout_weight="1" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
