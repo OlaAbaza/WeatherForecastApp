@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">إعدادات</string>
+    <string name="favorites">المفضلة</string>
+    <string name="title_activity_maps">الخريطة</string>
+    <string name="units_title">وحدات</string>
+    <string name="From">من</string>
+    <string name="to">الى</string>
+    <string name="map_btn">تاكيد</string>
+    <string name="unit_key">نظام الوحدات</string>
+    <string name="Events">الاحداث</string>
+    <string name="save_add_btn">ظبط</string>
+    <string name="notification">اشعار</string>
+    <string name="alarmSound">منبه</string>
+    <string name="alarm">منبه</string>
+    <string name="alarms_title">منبهات</string>
+    <string name="soundType">نوع التنبيه</string>
+    <string name="no_alarms">لا يوجد منبهات</string>
+    <string name="description">وصف</string>
+    <string name="dd_mm_yy">dd_mm_yy</string>
+    <string name="Date">اختر تاريخ</string>
+    <string name="Describtion">وصف</string>
+    <string name="attchement2_language">لغة التطبيق</string>
+    <string name="language_title">اللغة</string>
+    <string name="attachment2_summary">اختر الموقع من الخريطة</string>
+    <string name="attchement_title">الموقع</string>
+    <string name="attachment_titlel">استخدم موقعك الحالي</string>
+    <string name="attachment_summary">السماح للتطبيق بمعرفة موقعك الحالي</string>
+    <string name="loc_title">الموقع</string>
+    <string name="weather_details">التفاصيل</string>
+    <string name="_7_day_weather_report">نشرة الاسبوع</string>
+    <string name="manage_cities">التحكم بالمدن</string>
+    <string name="sunrise">الشروق</string>
+    <string name="sunset">الغروب</string>
+    <string name="wind">الرياح</string>
+    <string name="clouds">السحاب</string>
+    <string name="pressure">الضغط</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="notification_title">"الحدث: "</string>
+    <string name="notification_body">\"احترس هناك \"</string>
+    <string-array name="event_options">
+        <item>مطر</item>
+        <item>ثلوج</item>
+        <item>ضباب</item>
+        <item>عاصفة</item>
+        <item>غيوم</item>
+        <item>رياح</item>
+    </string-array>
+    <string-array name="alarm_type">
+        <item>اشعار</item>
+        <item>منبه</item>
+    </string-array>
+
+</resources>

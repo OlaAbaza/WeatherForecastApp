@@ -6,12 +6,13 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/details_text</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="actionOverflowMenuStyle">@style/popupOverflowMenu</item>
     </style>
 
     <style name="Theme.WetherForecastApp.NoActionBar">
@@ -19,25 +20,56 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="popupOverflowMenu" parent="@style/Widget.MaterialComponents.PopupMenu.Overflow">
+        <item name="android:popupBackground">@drawable/menu_bg</item>
+    </style>
+
     <style name="Theme.WetherForecastApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WetherForecastApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="SettingsTheme" parent="Theme.AppCompat">
+    <style name="SettingsTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Override properties according to your need -->
-        <item name="android:colorBackground">#ffffff</item>
+        <item name="android:colorBackground">@color/white</item>
+        <!--text summary-->
+        <item name="android:colorForeground">@color/hour_text</item>
         <!--switch close-->
-        <item name="android:colorForeground">#673AB7</item>
         <item name="colorSecondary">@color/purple_200</item>
-        <item name="colorSecondaryVariant">#FF00DE</item>
-        <item name="colorOnSecondary">#CDDC39</item>
+        <!--title2Text-->
+        <item name="android:textColorPrimary">@color/hour_text</item>
+        <!--title1Text-->
+        <item name="colorAccent">@color/details_text</item>
+        <!--switch open-->
+        <item name="colorControlActivated">@color/details_text</item>
+        <!--on select item-->
+        <item name="colorControlHighlight">@color/main_card</item>
+    </style>
+    <!-- Theme.AppCompat.Light is not a dialog theme -->
+    <style name="DialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">@color/details_text</item>
+    </style>
 
-        <!--titleText-->
-        <item name="android:textColorPrimary">#FBF7F7</item>
-        <!--summary check box border-->
-        <item name="android:textColorSecondary">#0000ff</item>
-        <item name="android:textColorTertiary">#00ff00</item>
-        <item name="android:textColorPrimaryDisableOnly">#03A9F4</item>
-        <item name="android:textColorHint">#FFEB3B</item>
+    <style name="DatePickerTheme" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+        <item name="colorAccent">@color/details_text</item>
+        <item name="android:headerBackground">@color/white</item>
+        <item name="android:textColorHighlight">@color/details_text</item>
+        <item name="android:textColor">@color/main_card</item>
+
+        <item name="android:textColorLink">@color/details_text</item>
+        <item name="android:textColorLinkInverse">@color/details_text</item>
+
+        <item name="android:timePickerDialogTheme">?attr/alertDialogTheme</item>
+    </style>
+    <style name="DialogStyle" parent="android:Theme.Material.Dialog.Alert">
+        <item name="colorAccent">@color/details_text</item>
+        <!--title2Text-->
+        <item name="android:textColorPrimary">@color/hour_text</item>
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 </resources>

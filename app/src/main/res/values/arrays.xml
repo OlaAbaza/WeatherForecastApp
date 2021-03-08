@@ -20,12 +20,6 @@
         <item>English</item>
         <item>Arabic</item>
     </string-array>
-    <string-array name="event_options">
-        <item>Rain</item>
-        <item>snow</item>
-        <item>mist/fog</item>
-        <item>thunderstorm</item>
-        <item>cloud</item>
-        <item>wend</item>
-    </string-array>
+
+
 </resources>

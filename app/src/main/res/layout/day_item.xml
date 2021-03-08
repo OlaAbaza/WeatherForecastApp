@@ -4,55 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_purple"
-    android:orientation="vertical">
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/white" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="6">
+    android:weightSum="6"
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/dailyDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:text="Fri"
-        android:layout_weight="1"
-        android:textColor="@color/white"
-        android:textSize="11sp" />
-        <TextView
-            android:id="@+id/dailyDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            tools:text="2/25"
-            android:textColor="@color/white"
-            android:textSize="11sp" />
-
-    <ImageView
-        android:id="@+id/imgDay"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_baseline_wb_sunny_24"
-        android:layout_weight="1" />
-        <TextView
-            android:id="@+id/dayDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="cloudy"
-            android:layout_marginEnd="5dp"
-            android:gravity="end"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="11sp" />
+        android:text="Friday,5 Dec "
+        android:layout_weight="4"
+        android:fontFamily="@font/noto_sans"
+        android:textColor="@color/hour_text"
+        android:textSize="15sp" />
         <TextView
             android:id="@+id/maxTemb"
             android:layout_width="wrap_content"
@@ -61,9 +25,10 @@
             android:text="19°/"
             android:layout_marginEnd="5dp"
             android:gravity="end"
+            android:fontFamily="@font/noto_sans"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="11sp" />
+            android:textColor="@color/hour_text"
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/minTemb"
             android:layout_width="wrap_content"
@@ -72,9 +37,29 @@
             android:layout_marginEnd="5dp"
             android:gravity="end"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="11sp" />
+            android:fontFamily="@font/noto_sans"
+            android:textColor="@color/hour_text"
+            android:textSize="15sp" />
 
+    <ImageView
+        android:id="@+id/imgDay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_baseline_wb_sunny_24"
+        android:layout_weight="1"
+        app:tint="@color/hour_text" />
+        <!--TextView
+            android:id="@+id/dayDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="cloudy"
+            android:layout_marginEnd="5dp"
+            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/hour_text"
+            android:textSize="11sp" /-->
 
-</LinearLayout>
 </LinearLayout>

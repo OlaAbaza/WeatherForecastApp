@@ -15,7 +15,7 @@
             android:title="@string/attchement_title">
             <!--intent
                 android:action="com.example.wetherforecastapp.SETTING_START_ACTIVITY"
-                android:targetClass="com.example.wetherforecastapp.MapsActivity"
+                android:targetClass="com.example.wetherforecastapp.View.Activities.MapsActivity"
                 android:targetPackage="com.example.wetherforecastapp"/-->
         </Preference>
         <EditTextPreference

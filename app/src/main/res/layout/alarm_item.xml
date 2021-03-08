@@ -21,20 +21,15 @@
         app:cardElevation="8dp"
         app:layout_constraintVertical_bias="0.021">
 
-        <!--This is a ConstraintLayout for the entire CardView
-                including the expandable portion-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.511"
+            android:background="@color/alarm_card"
             tools:layout_editor_absoluteX="-55dp">
 
-            <!--This is a ConstraintLayout for the fixed portion
-                of the CardView. The elements
-                that lie within the fixed portion of the CardView
-                can be constrained to this layout.-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fixed_layout"
                 android:layout_width="match_parent"
@@ -52,10 +47,9 @@
                     android:id="@+id/alarmType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/light_purple"
-                    android:textSize="25dp"
+                    android:textColor="@color/details_text"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:drawableStart="@drawable/ic_baseline_wb_sunny_24"
                     app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
                     app:layout_constraintEnd_toStartOf="@+id/edit_btn"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -63,19 +57,18 @@
                     app:layout_constraintTop_toTopOf="@+id/fixed_layout"
                     app:layout_constraintVertical_bias="0.198"
                     tools:text="Event name"/>
-
-                <!--This is ImageButton for the expansion icon.-->
                 <ImageView
                     android:id="@+id/edit_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_baseline_edit_24"
                     app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
-                    app:layout_constraintEnd_toStartOf="@+id/delete_btn"
                     app:layout_constraintHorizontal_bias="0.802"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintVertical_bias="0.0"/>
-                <ImageView
+                <!--ImageView
                     android:id="@+id/delete_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,34 +77,31 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginEnd="5dp"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0" /-->
 
                 <TextView
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/date_time"
-                    app:layout_constraintTop_toBottomOf="@+id/alarmType"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:textColor="#000000"
-                    android:layout_marginEnd="10dp"
-                    tools:text="Tree clup"
-                    android:textSize="10dp"
-                    android:drawableStart="@drawable/ic_baseline_wb_sunny_24" />
+                    android:textColor="@color/details_text"
+                    android:layout_marginEnd="20dp"
+                    tools:text="10.9.2012 5:49to6:49"
+                    android:textSize="10sp" />
 
                 <TextView
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/details"
-                    app:layout_constraintTop_toBottomOf="@+id/date_time"
-                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@+id/alarmType"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/details_text"
                     android:layout_marginEnd="10dp"
-                    tools:text="Tree clup"
-                    android:drawableStart="@drawable/ic_baseline_wb_sunny_24" />
+                    tools:text="Tree clup" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

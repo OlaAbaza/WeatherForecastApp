@@ -1,97 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/light_purple"
-    tools:context=".View.ScrollingActivity">
+    tools:context=".ui.Activities.ScrollingActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:background="@color/light_purple"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_bg_main"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.Activities.ScrollingActivity">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <TextView
+            android:id="@+id/homeCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="Africa/Cairo"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Africa/Cairo" />
+
+        <TextView
+            android:id="@+id/homeetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="2:30 AM"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeCountry"
+            tools:text="2:30 AM" />
+
+        <TextView
+            android:id="@+id/homedata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="1/11/2021"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/homeetime"
+            app:layout_constraintTop_toBottomOf="@+id/homeCountry"
+            tools:text="1/11/2021" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="55dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+        <ImageView
+            android:id="@+id/dec_icon"
+            android:layout_width="122dp"
+            android:layout_height="122dp"
+            android:src="@drawable/sun"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/homeTemp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/homedata"
+            app:layout_constraintTop_toTopOf="@+id/homedata"
+            app:layout_constraintVertical_bias="0.375" />
+
+        <TextView
+            android:id="@+id/homeTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="50°"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dec_icon"
+            tools:text="50°" />
+
+        <TextView
+            android:id="@+id/homeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="Mostly cloudy"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/noto_sans"
+            android:alpha="0.5"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.634"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeTemp"
+            tools:text="Mostly cloudy" />
+</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/menu_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/menu_fav"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
+                android:src="@drawable/star_icon" />
+            <ImageView
+                android:id="@+id/menu_alarm"
+                android:layout_width="30dp"
+                android:layout_margin="5dp"
+                android:layout_height="30dp"
+                android:elevation="10dp"
+                android:src="@drawable/bell_icon" />
+
+
+            <ImageView
+                android:id="@+id/menu_setting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
+                android:src="@drawable/setting_icon" />
+        </LinearLayout>
+
+        <!--ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.23"
+            />
+        <LinearLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                />
-               <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_collapseMode="parallax"
-                    android:layout_gravity="center">
-                    <TextView
-                        android:id="@+id/homeTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/white"
-                        android:textSize="60sp"
-                        android:text="19C°"
-                        tools:text="19°C" />
-                    <TextView
-                        android:id="@+id/homeDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:text="Mostly cloudy"
-                        tools:text="Mostly cloudy" />
-                   <TextView
-                       android:id="@+id/homeCountry"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginEnd="8dp"
-                       android:layout_marginStart="10dp"
-                       android:layout_marginTop="25dp"
-                       android:includeFontPadding="false"
-                       android:textColor="@color/white"
-                       android:textSize="18sp"
-                       android:layout_gravity="center"
-                       android:text="Zagazig"
-                       tools:text="Zagazig" />
-                   <TextView
-                       android:id="@+id/homedata"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginBottom="8dp"
-                       android:layout_marginEnd="8dp"
-                       android:layout_marginStart="10dp"
-                       android:includeFontPadding="false"
-                       android:layout_marginTop="7dp"
-                       android:layout_gravity="center"
-                       android:textColor="@color/white"
-                       android:textSize="10sp"
-                       android:text="Fri, Nov 03, 2017"
-                       tools:text="Fri, Nov 03, 2017" />
-
-               </LinearLayout>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-    <include android:id="@+id/iContent"
-        layout="@layout/content_scrolling" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:background="@drawable/cardview_bg"
+            android:orientation="vertical"
+            android:paddingBottom="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line">
+    <include
+        android:id="@+id/iContent"
+        layout="@layout/content_scrolling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

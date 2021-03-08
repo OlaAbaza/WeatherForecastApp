@@ -14,12 +14,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.preference.PreferenceManager
+import com.example.wetherforecastapp.R
 import com.example.wetherforecastapp.model.local.LocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
-
 
 class myAlarmReceiver: BroadcastReceiver() {
     lateinit var prefs: SharedPreferences
@@ -74,7 +74,8 @@ class myAlarmReceiver: BroadcastReceiver() {
 
     private fun notifyUser(context: Context, event: String,describtion:String,id: Int,sound:Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification("Event: "+event, "Be aware there is " + describtion,sound)
+            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification(context.getString(R.string.notification_title)+event, context.getString(
+                            R.string.notification_body) + describtion,sound)
             val notification=nb?.build()
             if(!sound){
                 notification?.flags= FLAG_INSISTENT

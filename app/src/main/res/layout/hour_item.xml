@@ -1,33 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="90dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="15dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:backgroundTint="@color/main_card">
+
+
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginEnd="10dp"
-    android:layout_marginStart="5dp"
-    app:layoutDescription="@xml/hour_item_scene">
+    android:layout_margin="4dp">
 
-    <TextView
-        android:id="@+id/Hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="16:00"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/white"/>
     <ImageView
         android:id="@+id/hourlyImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_wb_sunny_24"
-        />
-
+        app:tint="@color/details_text" />
+    <TextView
+        android:id="@+id/Hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16:00AM"
+        android:fontFamily="@font/noto_sans"
+        android:textSize="12sp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/details_text"/>
     <TextView
         android:id="@+id/hourlyTemb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/white"
+        android:fontFamily="@font/noto_sans"
+        android:textSize="12sp"
+        android:textColor="@color/details_text"
         android:text="99°" />
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>

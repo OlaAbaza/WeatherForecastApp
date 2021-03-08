@@ -7,5 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_purple">#8191ED</color>
+    <color name="main_card">#ECECEC</color>
+    <color name="alarm_card">#E8E8E8</color>
+    <color name="hour_text">#7B7B7B</color>
+    <color name="details_text">#504FD3</color>
+    <color name="textview_bg">#FBFBF4</color>
+    <color name="alarm_carjd">#D5D1D1</color>
+
 </resources>
