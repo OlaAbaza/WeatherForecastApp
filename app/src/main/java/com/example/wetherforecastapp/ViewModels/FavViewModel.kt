@@ -11,6 +11,8 @@ import com.example.wetherforecastapp.model.local.LocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FavViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -57,6 +59,11 @@ class FavViewModel(application: Application) : AndroidViewModel(application) {
      fun onShowClick(weatherObj:WeatherData){
         displayListener.value=weatherObj
     }
-
+     fun timeFormat(millisSeconds: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.setTimeInMillis((millisSeconds * 1000).toLong())
+        val format = SimpleDateFormat("hh:00 aaa")
+        return format.format(calendar.time)
+    }
 
 }

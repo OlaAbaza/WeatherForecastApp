@@ -33,7 +33,7 @@ class LocalDataSource {
         return weatherDao.getObjByTimezone(timeZone)
     }
 
-    //////Alarm///////////
+    //////////////Alarm///////////
     suspend fun deleteAlarmObj(id: Int) {
         weatherDao.deleteAlarmObj(id)
     }

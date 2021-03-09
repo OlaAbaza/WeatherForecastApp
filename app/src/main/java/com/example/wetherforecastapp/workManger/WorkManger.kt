@@ -10,10 +10,11 @@ import com.example.wetherforecastapp.model.WeatherRepository
 import com.example.wetherforecastapp.model.remote.Setting
 
 
-class WorkManger(appContext: Context, workerParams: WorkerParameters):
+class WorkManger(appContext: Context, workerParams: WorkerParameters) :
     Worker(appContext, workerParams) {
-    var weatherRepository : WeatherRepository = WeatherRepository(appContext.applicationContext as Application)
-    var prefs= PreferenceManager.getDefaultSharedPreferences(applicationContext)
+    var weatherRepository: WeatherRepository =
+        WeatherRepository(appContext.applicationContext as Application)
+    var prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
     override fun doWork(): Result {
         return try {
             // Do the work here--in this case, upload the images.

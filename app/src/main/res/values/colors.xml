@@ -12,6 +12,11 @@
     <color name="hour_text">#7B7B7B</color>
     <color name="details_text">#504FD3</color>
     <color name="textview_bg">#FBFBF4</color>
-    <color name="alarm_carjd">#D5D1D1</color>
+    <color name="Transpernt">#00000000</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+
 
 </resources>

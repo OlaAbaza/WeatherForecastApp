@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AlarmActivity : AppCompatActivity() {
+class AlarmActivity : BaseActivity() {
 
     private lateinit var viewModel: AlarmViewModel
     private lateinit var binding: ActivityAlarmBinding
@@ -51,14 +51,17 @@ class AlarmActivity : AppCompatActivity() {
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(
-                AlarmViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(
+            AlarmViewModel::class.java
+        )
         alertAdabter = AlarmAdapter(arrayListOf(), viewModel, applicationContext)
 
         viewModel.getNavigate().observe(this, Observer<Alarm> {
             isedit = true
             showDialog(it)
-            //Toast.makeText(this, "alarm: " + it.id, Toast.LENGTH_SHORT).show()
         })
 
         initUI()//init recylcer view
@@ -109,62 +112,79 @@ class AlarmActivity : AppCompatActivity() {
         var current = Calendar.getInstance()
 
         bindingDialog.fromTimeImg.setOnClickListener {
-            val tpd1 = TimePickerDialog(this,  { view, h, m ->
-                calStart.set(Calendar.HOUR_OF_DAY, h)
-                calStart.set(Calendar.MINUTE, m)
-                calStart.set(Calendar.SECOND, 0)
-                // alarmObj.start = "$h : $m"
-                val format = SimpleDateFormat("hh:mm aaa")
-                alarmObj.start = format.format(calStart.time)
-                bindingDialog.fromTimeImg.setText(format.format(calStart.time))
-                Log.i("alarm", "ss" + format.format(calStart.time))
-            }, current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE), android.text.format.DateFormat.is24HourFormat(getApplicationContext()))
+            val tpd1 = TimePickerDialog(
+                this,
+                { view, h, m ->
+                    calStart.set(Calendar.HOUR_OF_DAY, h)
+                    calStart.set(Calendar.MINUTE, m)
+                    calStart.set(Calendar.SECOND, 0)
+                    // alarmObj.start = "$h : $m"
+                    val format = SimpleDateFormat("hh:mm aaa")
+                    alarmObj.start = format.format(calStart.time)
+                    bindingDialog.fromTimeImg.setText(format.format(calStart.time))
+                    Log.i("alarm", "ss" + format.format(calStart.time))
+                },
+                current.get(Calendar.HOUR_OF_DAY),
+                current.get(Calendar.MINUTE),
+                android.text.format.DateFormat.is24HourFormat(getApplicationContext())
+            )
             tpd1.show()
         }
 
         bindingDialog.toTimeImg.setOnClickListener {
-            val tpd = TimePickerDialog(this, { view, h, m ->
-                calEnd.set(Calendar.HOUR_OF_DAY, h)
-                calEnd.set(Calendar.MINUTE, m)
-                calEnd.set(Calendar.SECOND, 0)
-                // alarmObj.end = "$h : $m"
-                val format = SimpleDateFormat("hh:mm aaa")
-                alarmObj.end = format.format(calEnd.time)
-                bindingDialog.toTimeImg.setText(format.format(calEnd.time))
-                // val chosenTime = DateFormat.getTimeInstance().format(calEnd.getTime())
-                bindingDialog.toTimeImg.setText(format.format(calEnd.time))
-                //Toast.makeText(this, h.toString() + " : " + m, Toast.LENGTH_LONG).show()
-                Log.i("alarm", "l" + format.format(calEnd.time))
+            val tpd = TimePickerDialog(
+                this,
+                { view, h, m ->
+                    calEnd.set(Calendar.HOUR_OF_DAY, h)
+                    calEnd.set(Calendar.MINUTE, m)
+                    calEnd.set(Calendar.SECOND, 0)
+                    // alarmObj.end = "$h : $m"
+                    val format = SimpleDateFormat("hh:mm aaa")
+                    alarmObj.end = format.format(calEnd.time)
+                    bindingDialog.toTimeImg.setText(format.format(calEnd.time))
+                    bindingDialog.toTimeImg.setText(format.format(calEnd.time))
+                    Log.i("alarm", "l" + format.format(calEnd.time))
 
-            }, current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE), android.text.format.DateFormat.is24HourFormat(getApplicationContext()))
+                },
+                current.get(Calendar.HOUR_OF_DAY),
+                current.get(Calendar.MINUTE),
+                android.text.format.DateFormat.is24HourFormat(getApplicationContext())
+            )
             tpd.show()
         }
 
         bindingDialog.calenderBtn.setOnClickListener {
-            val dateSetListener = DatePickerDialog(this, R.style.DialogTheme, { view, year, monthOfYear, dayOfMonth ->
-                calStart.set(Calendar.YEAR, year)
-                calStart.set(Calendar.MONTH, monthOfYear)
-                calStart.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val dateSetListener = DatePickerDialog(
+                this,
+                R.style.DialogTheme,
+                { view, year, monthOfYear, dayOfMonth ->
+                    calStart.set(Calendar.YEAR, year)
+                    calStart.set(Calendar.MONTH, monthOfYear)
+                    calStart.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                calEnd.set(Calendar.YEAR, year)
-                calEnd.set(Calendar.MONTH, monthOfYear)
-                calEnd.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    calEnd.set(Calendar.YEAR, year)
+                    calEnd.set(Calendar.MONTH, monthOfYear)
+                    calEnd.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val dateFormant = SimpleDateFormat("dd-MM-yyyy")
-                val currentDate = dateFormant.parse(dateFormant.format(current.getTime()))
-                val selectedDate = dateFormant.parse(dateFormant.format(calStart.getTime()))
-                if (currentDate.after(selectedDate) && (!currentDate.equals(selectedDate))) {
-                    Toast.makeText(this, "Set valid date", Toast.LENGTH_LONG).show()
-                } else {
-                    val myFormat = "dd.MM.yyyy" // mention the format you need
-                    val sdf = SimpleDateFormat(myFormat, Locale.US)
-                    alarmObj.Date = sdf.format(calStart.time)
-                    val chosenDate = DateFormat.getDateInstance().format(calStart.getTime())
-                    bindingDialog.calenderBtn.setText(chosenDate)
-                    Log.i("alarm", "dd" + chosenDate)
-                }
+                    val dateFormant = SimpleDateFormat("dd-MM-yyyy")
+                    val currentDate = dateFormant.parse(dateFormant.format(current.getTime()))
+                    val selectedDate = dateFormant.parse(dateFormant.format(calStart.getTime()))
+                    if (currentDate.after(selectedDate) && (!currentDate.equals(selectedDate))) {
+                        Toast.makeText(this, "Set valid date", Toast.LENGTH_LONG).show()
+                    } else {
+                        val myFormat = "dd/MM/yyyy" // mention the format you need
+                        val sdf = SimpleDateFormat(myFormat, Locale.US)
+                        alarmObj.Date = sdf.format(calStart.time)
+                        val chosenDate = DateFormat.getDateInstance().format(calStart.getTime())
+                        bindingDialog.calenderBtn.setText(chosenDate)
+                        Log.i("alarm", "dd" + chosenDate)
+                    }
 
-            }, current.get(Calendar.YEAR), current.get(Calendar.MONTH), current.get(Calendar.DAY_OF_MONTH))
+                },
+                current.get(Calendar.YEAR),
+                current.get(Calendar.MONTH),
+                current.get(Calendar.DAY_OF_MONTH)
+            )
 
             dateSetListener.show()
         }
@@ -183,12 +203,24 @@ class AlarmActivity : AppCompatActivity() {
                     var jop = CoroutineScope(Dispatchers.IO).launch {
                         id = viewModel.insertAlarmObj(alarmObj).toInt()
                     }
-                    Log.i("alarm", "dd" + calStart + "\n" + calEnd)
-                    jop.invokeOnCompletion { setAlarm(applicationContext, id, calStart, calEnd, alarmObj.event, alarmObj.sound) }
+                    jop.invokeOnCompletion {
+                        setAlarm(
+                            applicationContext,
+                            id,
+                            calStart,
+                            calEnd,
+                            alarmObj.event,
+                            alarmObj.sound
+                        )
+                    }
                     dialog.dismiss()
 
                 } else {
-                    Toast.makeText(this, "Please Make Sure Your Timing is correct", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Please Make Sure Your Timing is correct",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
             }
@@ -201,17 +233,27 @@ class AlarmActivity : AppCompatActivity() {
         dialog.getWindow()?.setAttributes(lp)
     }
 
-    private fun setAlarm(context: Context, id: Int, calStart: Calendar, calEnd: Calendar, event: String, sound: Boolean) {
+    private fun setAlarm(
+        context: Context,
+        id: Int,
+        calStart: Calendar,
+        calEnd: Calendar,
+        event: String,
+        sound: Boolean
+    ) {
         val mIntent = Intent(context, myAlarmReceiver::class.java)
         mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         mIntent.putExtra("endTime", calEnd.timeInMillis)
         mIntent.putExtra("id", id)
         mIntent.putExtra("event", event)
         mIntent.putExtra("sound", sound)
-        val mPendingIntent = PendingIntent.getBroadcast(this, id, mIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val mPendingIntent =
+            PendingIntent.getBroadcast(this, id, mIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val mAlarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calStart.timeInMillis,
-                2 * 1000, mPendingIntent)
+        mAlarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP, calStart.timeInMillis,
+            2 * 1000, mPendingIntent
+        )
     }
 
     private fun getEvent(): String {
@@ -238,19 +280,24 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun validateDialog(): Boolean {
         if (bindingDialog.toTime.text.isEmpty())
-            Toast.makeText(this, "Time is empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.empty_time), Toast.LENGTH_SHORT).show()
         else if (bindingDialog.fromTime.text.isEmpty())
-            Toast.makeText(this, "Time is empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.empty_time), Toast.LENGTH_SHORT).show()
         else if (bindingDialog.calenderBtn.text.isEmpty())
-            Toast.makeText(this, "Date is empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.empty_date), Toast.LENGTH_SHORT).show()
         else
             return true
         return false
     }
 
     private fun rvSwipeListener() {
-        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        val itemTouchHelperCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
                 return false
             }
 
@@ -259,7 +306,7 @@ class AlarmActivity : AppCompatActivity() {
                 val item: Alarm = alertAdabter.getItemAt(position)
                 alertAdabter.alarmList.removeAt(position)
                 alertAdabter.notifyItemRemoved(position);
-                Toast.makeText(applicationContext, "deleted", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "deleted", Toast.LENGTH_SHORT).show()
                 Snackbar.make(binding.alarmList, "deleted", Snackbar.LENGTH_SHORT).apply {
                     setAction("UNDO") {
                         alertAdabter.alarmList.add(item)
@@ -280,16 +327,22 @@ class AlarmActivity : AppCompatActivity() {
                                 Log.i("snack", "onDismissed")
                                 viewModel.deleteAlarmObj(item.id)
                                 val intent = Intent(applicationContext, myAlarmReceiver::class.java)
-                                val pendingIntent = PendingIntent.getBroadcast(applicationContext, item.id, intent, 0)
-                                val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                                val pendingIntent = PendingIntent.getBroadcast(
+                                    applicationContext,
+                                    item.id,
+                                    intent,
+                                    0
+                                )
+                                val alarmManager =
+                                    applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
                                 alarmManager.cancel(pendingIntent)
                             }
 
                         }
                     })
-                    setTextColor(Color.parseColor("#504FD3"))
-                    setActionTextColor(Color.parseColor("#504FD3"))
-                    setBackgroundTint(Color.parseColor("#D5D1D1"))
+                    setTextColor(Color.parseColor("#FFFFFFFF"))
+                    setActionTextColor(Color.parseColor("#FFBB86FC"))
+                    setBackgroundTint(Color.parseColor("#616161"))
                     duration.minus(1)
                 }.show()
 

@@ -53,6 +53,9 @@
     <string name="humidity">Humidity</string>
     <string name="notification_title">"Event: "</string>
     <string name="notification_body">\"Be aware there is \"</string>
+    <string name="fav_tooltips">Add city</string>
+    <string name="alarm_toolstip">Add alarm</string>
+    <string name="helpInfo">swipe to delete</string>
 
     <string-array name="event_options">
         <item>Rain</item>
@@ -66,5 +69,9 @@
         <item>Notification</item>
         <item>Alarm</item>
     </string-array>
+    <string name="empty_date">Date is empty</string>
+    <string name="empty_time">Time is empty</string>
+    <string name="Notification_title">Notifications</string>
+    <string name="notification_symmary">Show Current Weather as notification</string>
 
 </resources>

@@ -9,12 +9,17 @@ import com.example.wetherforecastapp.databinding.AlarmItemBinding
 import com.example.wetherforecastapp.model.entity.Alarm
 import java.util.ArrayList
 
-class AlarmAdapter (var alarmList: ArrayList<Alarm>, alartViewModel: AlarmViewModel, context: Context) : RecyclerView.Adapter<AlarmAdapter.VH>() {
-     var context: Context
-     var alartViewModel: AlarmViewModel
+class AlarmAdapter(
+    var alarmList: ArrayList<Alarm>,
+    alartViewModel: AlarmViewModel,
+    context: Context
+) : RecyclerView.Adapter<AlarmAdapter.VH>() {
+    var context: Context
+    var alartViewModel: AlarmViewModel
+
     init {
-        this.context=context
-        this.alartViewModel=alartViewModel
+        this.context = context
+        this.alartViewModel = alartViewModel
     }
 
 
@@ -28,21 +33,23 @@ class AlarmAdapter (var alarmList: ArrayList<Alarm>, alartViewModel: AlarmViewMo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val viewBinding =
-                AlarmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            AlarmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VH(viewBinding)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.myView.alarmType.text =alarmList[position].event
-        holder.myView.dateTime.text = alarmList[position].Date+" "+alarmList[position].start+" to "+alarmList[position].end
-        holder.myView.details.text =alarmList[position].description
+        holder.myView.alarmType.text = alarmList[position].event
+        holder.myView.dateTime.text =
+            alarmList[position].Date + " " + alarmList[position].start + " to " + alarmList[position].end
+        holder.myView.details.text = alarmList[position].description
 
         holder.myView.editBtn.setOnClickListener {
             alartViewModel.onEditClick(alarmList[position])
         }
 
     }
-    fun getItemAt(pos:Int)=alarmList.get(pos)
+
+    fun getItemAt(pos: Int) = alarmList.get(pos)
     override fun getItemCount() = alarmList.size
 
 }

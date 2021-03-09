@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:fitsSystemWindows="true"
+    android:id="@+id/cl_main"
     tools:context=".ui.Activities.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHourly"
             android:layout_width="match_parent"
@@ -22,7 +29,6 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
         <TextView
             android:id="@+id/dailyDay"
             android:layout_width="match_parent"
@@ -103,7 +109,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="75%" />
+                        tools:text="75%" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -147,7 +153,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="1024" />
+                        tools:text="1024" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -191,7 +197,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="4" />
+                        tools:text="4" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -239,9 +245,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="3.09" />
+                        tools:text="3.09"
+                        android:textColor="@color/details_text" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -285,7 +291,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="07:44AM" />
+                        tools:text="07:44AM" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -329,13 +335,13 @@
                         android:layout_gravity="center"
                         android:textColor="@color/details_text"
                         android:layout_marginBottom="4dp"
-                        android:text="07:33PM" />
+                        tools:text="07:33PM" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-
     </LinearLayout>
 
 
 </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

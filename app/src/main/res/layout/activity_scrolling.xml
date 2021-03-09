@@ -6,15 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/cl_main"
     tools:context=".ui.Activities.ScrollingActivity">
+
+
 
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_bg_main"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.Activities.ScrollingActivity">
+        <ProgressBar
+            android:id="@+id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:theme="@style/progressBarBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_bg_main"
@@ -29,7 +53,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/noto_sans"
-            android:text="Africa/Cairo"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +68,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/noto_sans"
-            android:text="2:30 AM"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintHorizontal_bias="0.0"
@@ -60,7 +82,6 @@
             android:layout_marginTop="2dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/noto_sans"
-            android:text="1/11/2021"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintHorizontal_bias="1.0"
@@ -95,7 +116,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="50°"
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textAlignment="center"
@@ -110,7 +130,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="Mostly cloudy"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:fontFamily="@font/noto_sans"
@@ -188,6 +207,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp" />
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

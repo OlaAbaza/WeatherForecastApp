@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wetherforecastapp">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -16,11 +17,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WetherForecastApp">
+        <activity android:name=".ui.Activities.WelcomeScreenActivity"
+            android:theme="@style/WelcomeScreenTheme"/>
         <activity android:name=".ui.Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,22 +31,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Activities.AlarmActivity"
+        <activity
+            android:name=".ui.Activities.AlarmActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.Activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
 
         <receiver
             android:name=".Utils.myAlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".ui.Activities.FavoriteActivity"
+        <activity
+            android:name=".ui.Activities.FavoriteActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -64,10 +69,9 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ui.Activities.ScrollingActivity"
-            android:theme="@style/Theme.WetherForecastApp.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WetherForecastApp.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -27,10 +27,11 @@ class WeatherNotification(base: Context?) : ContextWrapper(base) {
         var androidChannel: NotificationChannel? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             androidChannel = NotificationChannel(
-                    ANDROID_CHANNEL_ID,
-                    ANDROID_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT
+                ANDROID_CHANNEL_ID,
+                ANDROID_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
             )
+
             androidChannel.enableLights(true)
             // Sets whether notification posted to this channel should vibrate.
             androidChannel.enableVibration(true)
@@ -45,31 +46,41 @@ class WeatherNotification(base: Context?) : ContextWrapper(base) {
     fun getManager(): NotificationManager? {
         if (mManager == null) {
             mManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
         }
         return mManager
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    fun getAndroidChannelNotification( title: String,body: String,sound:Boolean): NotificationCompat.Builder? {
-        if (sound){
+    fun getAndroidChannelNotification(
+        title: String,
+        body: String,
+        sound: Boolean,
+        cancel: Boolean
+    ): NotificationCompat.Builder? {
+        if (sound) {
             return NotificationCompat.Builder(
-                    getApplicationContext(),ANDROID_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
-                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setOngoing(false)
-        }else{
+                getApplicationContext(), ANDROID_CHANNEL_ID
+            )
+                .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setContentTitle(title)
+                .setContentText(body)
+                .setColor(Color.parseColor("#504FD3"))
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setOngoing(cancel)
+
+        } else {
             return NotificationCompat.Builder(
-                    getApplicationContext(),ANDROID_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
-                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setOngoing(false)
+                getApplicationContext(), ANDROID_CHANNEL_ID
+            )
+                .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
+                .setContentTitle(title)
+                .setColor(Color.parseColor("#504FD3"))
+                .setContentText(body)
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setOngoing(false)
         }
     }
 }

@@ -59,6 +59,7 @@
             android:layout_height="80dp"
             android:layout_gravity="end"
             android:clickable="true"
+            android:tooltipText="@string/fav_tooltips"
             android:elevation="10dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"

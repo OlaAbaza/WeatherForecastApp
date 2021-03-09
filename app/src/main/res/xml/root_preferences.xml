@@ -43,5 +43,13 @@
             android:summary="%s"
             android:title="@string/attchement2_language" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/Notification_title">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="notification"
+            android:summary="@string/notification_symmary"
+            android:title="@string/Notification_title" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
     <!-- android:summary="@string/unit_metric_summary"-->

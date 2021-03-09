@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FavoriteActivity : AppCompatActivity() {
+class FavoriteActivity : BaseActivity() {
     private lateinit var viewModel: FavViewModel
     private lateinit var binding: ActivityFavBinding
     private lateinit var bindingDialog: FavDialogBinding
@@ -44,12 +44,15 @@ class FavoriteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(
-                FavViewModel::class.java
+            FavViewModel::class.java
         )
-        favoriteAdapter = FavoriteAdapter(arrayListOf(), viewModel, applicationContext)
+        val sharedPreferences: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(this)
+        val timeZone = sharedPreferences.getString("timezone", "").toString()
+        favoriteAdapter = FavoriteAdapter(arrayListOf(), viewModel, applicationContext,timeZone)
         initUI()
         rvSwipeListener()
         prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -67,7 +70,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
 
         binding.addBtn.setOnClickListener {
-            val intent: Intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, MapsActivity::class.java)
             intent.putExtra("mapId", 1)
             startActivity(intent)
             finish()
@@ -92,7 +95,13 @@ class FavoriteActivity : AppCompatActivity() {
 
     }
 
-    private fun observeViewModel(viewModel: FavViewModel, lat: Double, lon: Double, lang: String, unit: String) {
+    private fun observeViewModel(
+        viewModel: FavViewModel,
+        lat: Double,
+        lon: Double,
+        lang: String,
+        unit: String
+    ) {
         viewModel.loadWeather(applicationContext, lat, lon, lang, unit).observe(this, {
             favoriteAdapter.updateHours(it)
         })
@@ -122,41 +131,58 @@ class FavoriteActivity : AppCompatActivity() {
     private fun updateDialog(item: WeatherData) {
         item?.let {
             item.apply {
-                var sunrise = timeFormat(currentWether.sunrise)
-                var sunset = timeFormat(currentWether.sunset)
                 var split_timezone = timezone.split("/")
                 bindingDialog.favTemb.text = currentWether.temp.toInt().toString() + "°"
                 bindingDialog.timezoneTxt.text = split_timezone[0] + "\n" + split_timezone[1]
                 bindingDialog.favDesc.text = currentWether.weather.get(0).description.toString()
 
                 when {
-                    currentWether.weather.get(0).icon.contains("02d" + "", ignoreCase = true) -> bindingDialog.decIcon.setImageResource(R.drawable.cloud_sun)
-                    currentWether.weather.get(0).icon.contains("09" + "", ignoreCase = true)||  currentWether.weather.get(0).icon.contains("10" + "", ignoreCase = true) -> bindingDialog.decIcon.setImageResource(R.drawable.rain)
-                    currentWether.weather.get(0).icon.contains("13" + "", ignoreCase = true) -> bindingDialog.decIcon.setImageResource(R.drawable.snow)
-                    currentWether.weather.get(0).icon.contains("02n" + "", ignoreCase = true) -> bindingDialog.decIcon.setImageResource(R.drawable.cloud_night)
-                    currentWether.weather.get(0).icon.contains("01d" + "", ignoreCase = true)  -> bindingDialog.decIcon.setImageResource(R.drawable.sun)
-                    currentWether.weather.get(0).icon.contains("01n" + "", ignoreCase = true)  -> bindingDialog.decIcon.setImageResource(R.drawable.night_icon)
-                    currentWether.weather.get(0).icon.contains("11" + "", ignoreCase = true)  -> bindingDialog.decIcon.setImageResource(R.drawable.ic_wind)
+                    currentWether.weather.get(0).icon.contains(
+                        "02d" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.cloud_sun)
+                    currentWether.weather.get(0).icon.contains(
+                        "09" + "",
+                        ignoreCase = true
+                    ) || currentWether.weather.get(0).icon.contains(
+                        "10" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.rain)
+                    currentWether.weather.get(0).icon.contains(
+                        "13" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.snow)
+                    currentWether.weather.get(0).icon.contains(
+                        "02n" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.cloud_night)
+                    currentWether.weather.get(0).icon.contains(
+                        "01d" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.sun)
+                    currentWether.weather.get(0).icon.contains(
+                        "01n" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.night_icon)
+                    currentWether.weather.get(0).icon.contains(
+                        "11" + "",
+                        ignoreCase = true
+                    ) -> bindingDialog.decIcon.setImageResource(R.drawable.ic_wind)
                     else -> bindingDialog.decIcon.setImageResource(R.drawable.ic_cloud1)
                 }
                 bindingDialog.dialogContent.HumidityVal.text = currentWether.humidity.toString()
                 bindingDialog.dialogContent.WindSpeedVal.text = currentWether.windSpeed.toString()
                 bindingDialog.dialogContent.PressureVal.text = currentWether.pressure.toString()
                 bindingDialog.dialogContent.CloudsVal.text = currentWether.clouds.toString()
-                bindingDialog.dialogContent.SunriseVal.text = sunrise
-                bindingDialog.dialogContent.SunsetVal.text = sunset
+                bindingDialog.dialogContent.SunriseVal.text = viewModel.timeFormat(currentWether.sunrise)
+                bindingDialog.dialogContent.SunsetVal.text = viewModel.timeFormat(currentWether.sunset)
                 dailyListAdapter.updateDaily(daily)
                 hourlyListAdapter.updateHours(hourly)
             }
         }
     }
 
-    private fun timeFormat(millisSeconds: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar.setTimeInMillis((millisSeconds * 1000).toLong())
-        val format = SimpleDateFormat("hh:00 aaa")
-        return format.format(calendar.time)
-    }
+
 
     fun initDialog() {
         bindingDialog.dialogContent.rvHourly.apply {
@@ -172,43 +198,43 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun rvSwipeListener() {
         val itemTouchHelperCallback =
-                object :
-                        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-                    override fun onMove(
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder,
-                            target: RecyclerView.ViewHolder
-                    ): Boolean {
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
 
-                        return false
-                    }
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        val position = viewHolder.adapterPosition
-                        val item: WeatherData = favoriteAdapter.getItemAt(position)
-                        viewModel.onRemoveClick(item.timezone)
-                        favoriteAdapter.notifyItemRemoved(position);
-                        Toast.makeText(
-                                applicationContext, "deleted",
-                                Toast.LENGTH_SHORT
-                        ).show()
-                        Snackbar.make(
-                                binding.favLayout, // The ID of your coordinator_layout
-                                "Deleted",
-                                Snackbar.LENGTH_LONG
-                        ).apply {
-                            setAction("UNDO") {
-                                viewModel.insertWeatherObj(item)
-                                binding.rvFavList.scrollToPosition(position)
-                            }
-                            setTextColor(Color.parseColor("#504FD3"))
-                            setActionTextColor(Color.parseColor("#504FD3"))
-                            setBackgroundTint(Color.parseColor("#D5D1D1"))
-                            duration.minus(1)
-                        }.show()
-                    }
-
+                    return false
                 }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    val item: WeatherData = favoriteAdapter.getItemAt(position)
+                    viewModel.onRemoveClick(item.timezone)
+                    favoriteAdapter.notifyItemRemoved(position);
+                    Toast.makeText(
+                        applicationContext, "deleted",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Snackbar.make(
+                        binding.favLayout, // The ID of your coordinator_layout
+                        "Deleted",
+                        Snackbar.LENGTH_LONG
+                    ).apply {
+                        setAction("UNDO") {
+                            viewModel.insertWeatherObj(item)
+                            binding.rvFavList.scrollToPosition(position)
+                        }
+                        setTextColor(Color.parseColor("#FFFFFFFF"))
+                        setActionTextColor(Color.parseColor("#FFBB86FC"))
+                        setBackgroundTint(Color.parseColor("#616161"))
+                        duration.minus(1)
+                    }.show()
+                }
+
+            }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.rvFavList)
     }

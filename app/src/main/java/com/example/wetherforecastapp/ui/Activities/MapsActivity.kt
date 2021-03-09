@@ -48,10 +48,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     editor.putString("lon", (lon.toString()))
                     editor.apply()
                     editor.commit()
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    // intent.putExtra("lat", lat)
-                    // intent.putExtra("lon", lon)
-                    //intent.putExtra("id", 1)
                     startActivity(intent)
                     finish()
                 }

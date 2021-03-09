@@ -8,18 +8,28 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ui.Activities.ScrollingActivity">
-
+    <!--ImageView
+        android:id="@+id/help"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:tooltipText="@string/helpInfo"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_baseline_help_outline_24" /-->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:text="@string/alarms_title"
+        android:layout_marginTop="5dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/title"
         android:textStyle="bold" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,6 +71,7 @@
             android:id="@+id/addBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:tooltipText="@string/alarm_toolstip"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:clickable="true"

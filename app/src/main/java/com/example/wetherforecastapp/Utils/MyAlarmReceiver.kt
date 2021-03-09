@@ -21,28 +21,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-class myAlarmReceiver: BroadcastReceiver() {
+class myAlarmReceiver : BroadcastReceiver() {
     lateinit var prefs: SharedPreferences
     lateinit var notificationUtils: WeatherNotification
-    var notificationManager: NotificationManager?=null
+    var notificationManager: NotificationManager? = null
     override fun onReceive(context: Context, intent: Intent) {
         notificationUtils = WeatherNotification(context)
         notificationManager = notificationUtils.getManager()
         val c: Calendar = Calendar.getInstance()
         val LongEndTime = intent.getLongExtra("endTime", 0)
         var id = intent.getIntExtra("id", 0)
-        var sound=intent.getBooleanExtra("sound",true)
+        var sound = intent.getBooleanExtra("sound", true)
         Log.i("alarmID", "" + id)
         Log.i("alarmٍSound", "" + sound)
         Log.i("alarm", " " + LongEndTime + "  " + c.timeInMillis)
-        Toast.makeText(context, " " + LongEndTime + "  " + c.timeInMillis, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, " " + LongEndTime + "  " + c.timeInMillis, Toast.LENGTH_SHORT)
+            .show()
         if (LongEndTime < c.timeInMillis) {
             cancelAlarm(id, context)
             CoroutineScope(Dispatchers.IO).launch {
                 val localDataSource = LocalDataSource(context.applicationContext as Application)
                 localDataSource.deleteAlarmObj(id)
             }
-            Log.i("alarm", " cancel")
             Toast.makeText(context, "cancel ", Toast.LENGTH_SHORT).show()
 
         } else {
@@ -50,16 +50,26 @@ class myAlarmReceiver: BroadcastReceiver() {
             val timeZone = prefs.getString("timezone", "").toString()
             CoroutineScope(Dispatchers.IO).launch {
                 val localDataSource = LocalDataSource(context.applicationContext as Application)
-                val apiObj=localDataSource.getApiObj(timeZone)
+                val apiObj = localDataSource.getApiObj(timeZone)
                 val event = intent.getStringExtra("event")
-                if (apiObj.currentWether.weather.get(0).description.contains(event + "", ignoreCase = true)) {
-                    notifyUser(context,event+"",apiObj.currentWether.weather.get(0).description,id,sound)
+                if (apiObj.currentWether.weather.get(0).description.contains(
+                        event + "",
+                        ignoreCase = true
+                    )
+                ) {
+                    notifyUser(
+                        context,
+                        event + "",
+                        apiObj.currentWether.weather.get(0).description,
+                        id,
+                        sound
+                    )
                 }
 
             }
 
         }
-        Toast.makeText(context, "This toast will be shown every X minutes", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Alarm on", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -72,13 +82,22 @@ class myAlarmReceiver: BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
     }
 
-    private fun notifyUser(context: Context, event: String,describtion:String,id: Int,sound:Boolean) {
+    private fun notifyUser(
+        context: Context,
+        event: String,
+        describtion: String,
+        id: Int,
+        sound: Boolean
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification(context.getString(R.string.notification_title)+event, context.getString(
-                            R.string.notification_body) + describtion,sound)
-            val notification=nb?.build()
-            if(!sound){
-                notification?.flags= FLAG_INSISTENT
+            val nb: NotificationCompat.Builder? = notificationUtils.getAndroidChannelNotification(
+                context.getString(R.string.notification_title) + event, context.getString(
+                    R.string.notification_body
+                ) + describtion, sound, false
+            )
+            val notification = nb?.build()
+            if (!sound) {
+                notification?.flags = FLAG_INSISTENT
             }
             notificationUtils.getManager()?.notify(id, notification)
         }

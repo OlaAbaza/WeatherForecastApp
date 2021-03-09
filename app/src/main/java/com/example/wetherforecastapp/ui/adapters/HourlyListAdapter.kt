@@ -10,7 +10,8 @@ import com.example.wetherforecastapp.model.entity.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourlyListAdapter(var HourlyList: ArrayList<Hourly>) : RecyclerView.Adapter<HourlyListAdapter.VH>() {
+class HourlyListAdapter(var HourlyList: ArrayList<Hourly>) :
+    RecyclerView.Adapter<HourlyListAdapter.VH>() {
 
     fun updateHours(newHourlyList: List<Hourly>) {
         HourlyList.clear()
@@ -22,7 +23,7 @@ class HourlyListAdapter(var HourlyList: ArrayList<Hourly>) : RecyclerView.Adapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val viewBinding =
-                HourItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            HourItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VH(viewBinding)
     }
 
@@ -36,15 +37,23 @@ class HourlyListAdapter(var HourlyList: ArrayList<Hourly>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.myView.Hour.text = timeFormat(HourlyList[position].dt)
         holder.myView.hourlyTemb.text = HourlyList[position].temp.toInt().toString() + "°"
-        if(HourlyList[position].weather.get(0).description.contains("01d" + "", ignoreCase = true)) {
+        if (HourlyList[position].weather.get(0).description.contains(
+                "01d" + "",
+                ignoreCase = true
+            )
+        ) {
             holder.myView.hourlyImg.setImageResource(R.drawable.ic_baseline_wb_sunny_24)
+        } else {
+            Glide.with(holder.myView.hourlyImg.context)
+                .load(iconLinkgetter(HourlyList[position].weather.get(0).icon))
+                .placeholder(R.drawable.ic_baseline_wb_sunny_24).into(holder.myView.hourlyImg)
         }
-        else{ Glide.with(holder.myView.hourlyImg.context).load(iconLinkgetter(HourlyList[position].weather.get(0).icon)).placeholder(R.drawable.ic_baseline_wb_sunny_24).into(holder.myView.hourlyImg)}
 
     }
 
     override fun getItemCount() = HourlyList.size
 
-    fun iconLinkgetter(iconName: String): String = "https://openweathermap.org/img/wn/" + iconName + "@2x.png"
+    fun iconLinkgetter(iconName: String): String =
+        "https://openweathermap.org/img/wn/" + iconName + "@2x.png"
 
 }
