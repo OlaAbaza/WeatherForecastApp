@@ -6,13 +6,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.AndroidViewModel
 import com.example.wetherforecastapp.Utils.WeatherNotification
-import com.example.wetherforecastapp.model.WeatherRepository
 import com.example.wetherforecastapp.model.entity.WeatherData
 import com.example.wetherforecastapp.model.local.LocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 class SettingViewModel(application: Application) : AndroidViewModel(application) {
     var localDataSource: LocalDataSource
@@ -32,7 +30,7 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
                 val nb: NotificationCompat.Builder? =
                     notificationUtils.getAndroidChannelNotification(
                         "" + apiObj.currentWether.temp.toInt()
-                            .toString() + "°" + " " + apiObj.timezone,
+                            .toString() + "°" +" "+ apiObj.timezone,
                         "" + apiObj.currentWether.weather.get(0).description,
                         true,
                         true
@@ -47,3 +45,4 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
         NotificationManagerCompat.from(getApplication()).cancel(null, 4);
     }
 }
+

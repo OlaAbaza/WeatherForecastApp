@@ -1,112 +1,73 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/cardview_bg1">
 
-    <!--Base CardView-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/base_cardview"
-        style="@style/Base.CardView"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/alarmType"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:textColor="@color/details_text"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintEnd_toStartOf="@+id/edit_btn"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintVertical_bias="0.021">
+        app:layout_constraintVertical_bias="0.198"
+        tools:text="Event name" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511"
-            android:background="@color/alarm_card"
-            tools:layout_editor_absoluteX="-55dp">
+    <ImageView
+        android:id="@+id/edit_btn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <!--ImageView
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_del"
+        app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintVertical_bias="0.0" /-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fixed_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.0">
+    <TextView
+        android:id="@+id/date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/details_text"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_btn"
+        tools:text="10.9.2012 5:49to6:49" />
 
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/details_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarmType"
+        tools:text="Tree clup" />
 
-
-                <TextView
-                    android:id="@+id/alarmType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/details_text"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
-                    app:layout_constraintEnd_toStartOf="@+id/edit_btn"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@+id/fixed_layout"
-                    app:layout_constraintTop_toTopOf="@+id/fixed_layout"
-                    app:layout_constraintVertical_bias="0.198"
-                    tools:text="Event name"/>
-                <ImageView
-                    android:id="@+id/edit_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
-                    app:layout_constraintHorizontal_bias="0.802"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintVertical_bias="0.0"/>
-                <!--ImageView
-                    android:id="@+id/delete_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_del"
-                    app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintVertical_bias="0.0" /-->
-
-                <TextView
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/date_time"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/details_text"
-                    android:layout_marginEnd="20dp"
-                    tools:text="10.9.2012 5:49to6:49"
-                    android:textSize="10sp" />
-
-                <TextView
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/details"
-                    app:layout_constraintTop_toBottomOf="@+id/alarmType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:textColor="@color/details_text"
-                    android:layout_marginEnd="10dp"
-                    tools:text="Tree clup" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -92,8 +92,8 @@
     <include
         android:id="@+id/dialog_Content"
         layout="@layout/content_scrolling"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="130dp" />
 
 </androidx.cardview.widget.CardView>

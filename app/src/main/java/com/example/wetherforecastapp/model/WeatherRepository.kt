@@ -50,11 +50,10 @@ class WeatherRepository : ViewModel {
     }
 
     fun fetchWeatherObj(context: Context, lat: Double, lon: Double, lang: String, unit: String) {
-        loadingLiveData.postValue(true)
         if (isOnline(context)) {
+            loadingLiveData.postValue(true)
             CoroutineScope(Dispatchers.IO).launch {
-                val response =
-                    WeatherService.apiService.getCurrentWeatherByLatLng(lat, lon, lang, unit)
+                val response = WeatherService.apiService.getCurrentWeatherByLatLng(lat, lon, lang, unit)
                 try {
                     if (response.isSuccessful) {
                         response.body()?.let {
@@ -62,8 +61,8 @@ class WeatherRepository : ViewModel {
                             weatherObj.postValue(it)
                         }
                         loadingLiveData.postValue(false)
-
                     }
+
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

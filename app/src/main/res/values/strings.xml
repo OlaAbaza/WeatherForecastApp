@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">WeatherApp</string>
+    <string name="app_name" translatable="false">WeatherAware</string>
     <string name="action_settings">Settings</string>
     <string name="favorites">Favorites</string>
     <string name="title_activity_maps">Map</string>
@@ -51,7 +51,7 @@
     <string name="clouds">Clouds</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
-    <string name="notification_title">"Event: "</string>
+    <string name="notification_title">"Alert: "</string>
     <string name="notification_body">\"Be aware there is \"</string>
     <string name="fav_tooltips">Add city</string>
     <string name="alarm_toolstip">Add alarm</string>
@@ -60,15 +60,26 @@
     <string-array name="event_options">
         <item>Rain</item>
         <item>snow</item>
-        <item>mist/fog</item>
+        <item>fog</item>
         <item>thunderstorm</item>
         <item>cloud</item>
         <item>wind</item>
     </string-array>
+
     <string-array name="alarm_type">
         <item>Notification</item>
         <item>Alarm</item>
     </string-array>
+    <string-array name="maps_options">
+        <item>rain</item>
+        <item>clouds</item>
+        <item>precipitation</item>
+        <item>pressure</item>
+        <item>temp</item>
+        <item>snow</item>
+        <item>wind</item>
+    </string-array>
+
     <string name="empty_date">Date is empty</string>
     <string name="empty_time">Time is empty</string>
     <string name="Notification_title">Notifications</string>

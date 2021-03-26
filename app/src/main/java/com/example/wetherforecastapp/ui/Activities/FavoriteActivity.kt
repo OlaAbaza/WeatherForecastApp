@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -64,7 +65,7 @@ class FavoriteActivity : BaseActivity() {
             var unit = prefs.getString("UNIT_SYSTEM", Setting.IMPERIAL.Value).toString()
             var lang = prefs.getString("APP_LANG", Setting.ENGLISH.Value).toString()
             observeViewModel(viewModel, lat, lon, lang, unit)
-            Toast.makeText(this, " " + lon + lat, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, " " + lon + lat, Toast.LENGTH_SHORT).show()
         } else {
             getWeatherData(viewModel)
         }
@@ -118,14 +119,21 @@ class FavoriteActivity : BaseActivity() {
         dialog = Dialog(this)
         dialog.setCancelable(false)
         dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val lp = WindowManager.LayoutParams()
+        // change dialog size
+        lp.copyFrom(dialog.getWindow()?.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
         bindingDialog = FavDialogBinding.inflate(layoutInflater)
         dialog.setContentView(bindingDialog.root)
+
         initDialog()
         updateDialog(weatherObj)
         bindingDialog.closeBtn.setOnClickListener {
             dialog.dismiss()
         }
         dialog.show()
+        dialog.getWindow()?.setAttributes(lp)
     }
 
     private fun updateDialog(item: WeatherData) {
@@ -214,10 +222,7 @@ class FavoriteActivity : BaseActivity() {
                     val item: WeatherData = favoriteAdapter.getItemAt(position)
                     viewModel.onRemoveClick(item.timezone)
                     favoriteAdapter.notifyItemRemoved(position);
-                    Toast.makeText(
-                        applicationContext, "deleted",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                   // Toast.makeText(applicationContext, "deleted", Toast.LENGTH_SHORT).show()
                     Snackbar.make(
                         binding.favLayout, // The ID of your coordinator_layout
                         "Deleted",

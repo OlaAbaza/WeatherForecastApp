@@ -76,6 +76,7 @@ class ScrollingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScrollingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getWindow().setBackgroundDrawable(null);
         welcomeScreen = WelcomeHelper(this, WelcomeScreenActivity::class.java)
         welcomeScreen!!.show(savedInstanceState)
 
@@ -138,6 +139,11 @@ class ScrollingActivity : BaseActivity() {
             menuSetting.setOnClickListener {
                 val intent = Intent(applicationContext, SettingsActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+            }
+            menuMap.setOnClickListener {
+                val intent = Intent(applicationContext, MapsActivity::class.java)
+                intent.putExtra("layer","")
                 startActivity(intent)
             }
         }
@@ -225,6 +231,7 @@ class ScrollingActivity : BaseActivity() {
             }
 
             editor.putString("timezone", item.timezone)
+           // editor.apply()
             editor.commit()
         }
 

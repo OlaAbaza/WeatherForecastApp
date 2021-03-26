@@ -5,9 +5,12 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val API_KEY = "657a3a141a21f4b9151316c7a77c0d5e"
+const val API_KEY = "31cceaa80d19afe5ea2ec0f5b270311b"
 
-//https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&lang=ar&units=standard&exclude=minutely&appid=657a3a141a21f4b9151316c7a77c0d5e
+
+
+
+//https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&lang=ar&units=standard&exclude=minutely&appid=31cceaa80d19afe5ea2ec0f5b270311b
 interface WetherApi {
     @GET("data/2.5/onecall")
     suspend fun getCurrentWeatherByLatLng(

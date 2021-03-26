@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:text="Friday,5 Dec "
+        tools:text="Friday,5 Dec "
         android:layout_weight="4"
         android:fontFamily="@font/noto_sans"
         android:textColor="@color/hour_text"
@@ -33,7 +33,7 @@
             android:id="@+id/minTemb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="9°"
+            tools:text="9°"
             android:layout_marginEnd="5dp"
             android:gravity="end"
             android:layout_marginTop="10dp"
@@ -47,7 +47,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:src="@drawable/ic_baseline_wb_sunny_24"
+        tools:src="@drawable/ic_baseline_wb_sunny_24"
         android:layout_weight="1"
         app:tint="@color/hour_text" />
         <!--TextView

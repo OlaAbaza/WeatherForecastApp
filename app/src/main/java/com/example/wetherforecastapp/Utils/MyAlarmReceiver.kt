@@ -35,19 +35,19 @@ class myAlarmReceiver : BroadcastReceiver() {
         Log.i("alarmID", "" + id)
         Log.i("alarmٍSound", "" + sound)
         Log.i("alarm", " " + LongEndTime + "  " + c.timeInMillis)
-        Toast.makeText(context, " " + LongEndTime + "  " + c.timeInMillis, Toast.LENGTH_SHORT)
-            .show()
+       // Toast.makeText(context, " " + LongEndTime + "  " + c.timeInMillis, Toast.LENGTH_SHORT).show()
         if (LongEndTime < c.timeInMillis) {
             cancelAlarm(id, context)
             CoroutineScope(Dispatchers.IO).launch {
                 val localDataSource = LocalDataSource(context.applicationContext as Application)
                 localDataSource.deleteAlarmObj(id)
             }
-            Toast.makeText(context, "cancel ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "canceled ", Toast.LENGTH_SHORT).show()
 
         } else {
             prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val timeZone = prefs.getString("timezone", "").toString()
+            Toast.makeText(context, "Checking..", Toast.LENGTH_SHORT).show()
             CoroutineScope(Dispatchers.IO).launch {
                 val localDataSource = LocalDataSource(context.applicationContext as Application)
                 val apiObj = localDataSource.getApiObj(timeZone)
@@ -69,7 +69,7 @@ class myAlarmReceiver : BroadcastReceiver() {
             }
 
         }
-        Toast.makeText(context, "Alarm on", Toast.LENGTH_SHORT).show()
+
     }
 
 

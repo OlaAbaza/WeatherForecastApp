@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <fragment
         android:id="@+id/map"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
-<Button
-    android:id="@+id/confirmBtn"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:background="@drawable/fav_cards"
-    android:padding="8dp"
-    android:textSize="20sp"
-    android:elevation="5dp"
-    android:layout_margin="10dp"
-    android:text="@string/map_btn"
-    android:textColor="@color/white" />
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:elevation="5dp"
+        android:padding="8dp"
+        android:text="@string/map_btn"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/tileType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/arrow_drop_down"
+        android:entries="@array/maps_options"
+        android:popupBackground="@color/white"
+        android:spinnerMode="dropdown"
+        android:textColor="@color/details_text"
+        android:textColorHint="@color/details_text"
+        android:theme="@style/Theme.AppCompat.Light"
+        android:visibility="visible" />
 
 </RelativeLayout>

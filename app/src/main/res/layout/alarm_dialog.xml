@@ -6,7 +6,7 @@
     android:id="@+id/register_card"
     app:cardCornerRadius="20dp"
     android:background="#F3F2F7"
-    app:cardElevation="10dp"
+    app:cardElevation="15dp"
     android:focusableInTouchMode="false"
     app:cardUseCompatPadding="true">
     <ImageView
@@ -77,96 +77,96 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="2">
-    <LinearLayout
-        android:id="@+id/firstRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:weightSum="2">
-
-        <TextView
-            android:id="@+id/fromTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="@string/From" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputfrom"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:background="@drawable/textview_bg"
-            app:hintTextColor="@color/details_text">
-
-            <TextView
-                android:id="@+id/fromTimeImg"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <LinearLayout
+                android:id="@+id/firstRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:drawableRight="@drawable/ic_baseline_access_alarm_24"
-                android:maxLines="1"
-                android:hint="00:00"
-                android:inputType="time"
-                android:textSize="17sp"/>
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:weightSum="2">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/fromTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/From" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputfrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@drawable/textview_bg"
+                    app:hintTextColor="@color/details_text">
+
+                    <TextView
+                        android:id="@+id/fromTimeImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:drawableRight="@drawable/ic_baseline_access_alarm_24"
+                        android:maxLines="1"
+                        android:hint="00:00"
+                        android:inputType="time"
+                        android:textSize="17sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/secondRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:weightSum="2">
-
-        <TextView
-            android:id="@+id/toTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="@string/to"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Describtion_tv" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:background="@drawable/textview_bg"
-            app:hintTextColor="@color/details_text">
-
-            <TextView
-                android:id="@+id/toTimeImg"
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/secondRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:drawableRight="@drawable/ic_baseline_access_alarm_24"
-                android:maxLines="1"
-                android:hint="00:00"
-                android:inputType="time"
-                android:textSize="17sp"/>
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:weightSum="2">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/toTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/to"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Describtion_tv" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@drawable/textview_bg"
+                    app:hintTextColor="@color/details_text">
+
+                    <TextView
+                        android:id="@+id/toTimeImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:drawableRight="@drawable/ic_baseline_access_alarm_24"
+                        android:maxLines="1"
+                        android:hint="00:00"
+                        android:inputType="time"
+                        android:textSize="17sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    </LinearLayout>
-</LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
 
 
@@ -177,7 +177,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
-
             <CheckBox
                 android:id="@+id/notification"
                 android:layout_width="wrap_content"
@@ -186,68 +185,64 @@
                 android:text="@string/notification"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/secondRow" />
-
             <CheckBox
                 android:id="@+id/loopSound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/alarmSound" />
-
-
-
         </LinearLayout-->
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:weightSum="2"
-    android:orientation="horizontal">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/event"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/Events" />
-        <Spinner
-            android:id="@+id/event_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:entries="@array/event_options"
-            android:popupBackground="@color/white" />
-    </LinearLayout>
+            android:layout_marginStart="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Events" />
+                <Spinner
+                    android:id="@+id/event_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:entries="@array/event_options"
+                    android:popupBackground="@color/white" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/soundType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/soundType" />
-        <Spinner
-            android:id="@+id/sound_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:entries="@array/alarm_type"
-            android:popupBackground="@color/white" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/soundType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/soundType" />
+                <Spinner
+                    android:id="@+id/sound_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:entries="@array/alarm_type"
+                    android:popupBackground="@color/white" />
+            </LinearLayout>
 
-</LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/add_alarm_btn"

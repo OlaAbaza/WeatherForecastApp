@@ -53,6 +53,15 @@
         <item>غيوم</item>
         <item>رياح</item>
     </string-array>
+    <!--string-array name="maps_options">
+        <item>مطر</item>
+        <item>غيوم</item>
+        <item>هطول</item>
+        <item>الضغط</item>
+        <item>الحرارة</item>
+        <item>ثلج</item>
+        <item>رياح</item>
+    </string-array-->
     <string-array name="alarm_type">
         <item>إشعار</item>
         <item>منبه</item>

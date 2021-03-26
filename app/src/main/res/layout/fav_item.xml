@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="15dp"
     android:background="@drawable/ic_rectangle_314"
     android:id="@+id/favItem">
 
@@ -51,7 +51,6 @@
             android:id="@+id/favTemb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50°"
             tools:text="50°"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -61,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
-            android:text="Mostly cloudy"
+            tools:text="Mostly cloudy"
             android:textAlignment="center"
             android:alpha="0.6"
             android:textColor="@color/white"
