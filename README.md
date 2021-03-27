@@ -1,6 +1,5 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 # WeatherApp
-***
 
 ![appicon](https://github.com/OlaAbaza/WeatherForecastApp_iti/blob/master/ic_app.png)
 
@@ -9,6 +8,10 @@ from your location. Also, you can pick a specific location on the map and add it
 list of favorite locations and get all the weather information at this location. In 
 addition you can set an alert for rain, wind, fog, snow … etc.
 
+<h2 id="Outputs">Outputs</h2>
+<p>
+<img src="images/gif1.gif" height="200" />
+</p>
 ## Features
 * MVVM architecture.
 * Use [OpenWeatherMap](https://openweathermap.org/) API.
