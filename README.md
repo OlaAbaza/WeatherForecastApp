@@ -1,7 +1,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 # WeatherApp
 
-![appicon](https://github.com/OlaAbaza/WeatherForecastApp_iti/blob/master/ic_app.png)
+![appicon](https://github.com/OlaAbaza/WeatherForecastApp_iti/blob/master/images/ic_app.png)
 
 Android Mobile Application that displays the weather status and the temperature 
 from your location. Also, you can pick a specific location on the map and add it to a 
@@ -11,8 +11,13 @@ addition you can set an alert for rain, wind, fog, snow … etc.
 <h2 id="Outputs">Outputs</h2>
 <p>
 <img src="images/gif1.gif" height="200" />
+<img src="images/gif2.gif" height="200" />
+<img src="images/gif3.gif" height="200" />
+<img src="images/gif4.gif" height="200" />
+<img src="images/gif5.gif" height="200" />
 </p>
-## Features
+
+# Features
 * MVVM architecture.
 * Use [OpenWeatherMap](https://openweathermap.org/) API.
 * Automatic notifications about weather alerts.
