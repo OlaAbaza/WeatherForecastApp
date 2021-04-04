@@ -178,7 +178,7 @@ class ScrollingActivity : BaseActivity() {
         item?.let {
             item.apply {
                 binding.homeTemp.text = currentWether.temp.toInt().toString() + "°"
-                binding.homeDesc.text = currentWether.weather.get(0).description.toString()
+                binding.homeDesc.text = currentWether.weather.get(0).description
                 binding.homeCountry.text = timezone
                 binding.iContent.HumidityVal.text = currentWether.humidity.toString()
                 binding.iContent.WindSpeedVal.text = currentWether.windSpeed.toString()
@@ -231,6 +231,8 @@ class ScrollingActivity : BaseActivity() {
             }
 
             editor.putString("timezone", item.timezone)
+            editor.putString("temp", item.currentWether.temp.toInt().toString() + "°")
+            editor.putString("desc", item.currentWether.weather.get(0).description)
            // editor.apply()
             editor.commit()
         }

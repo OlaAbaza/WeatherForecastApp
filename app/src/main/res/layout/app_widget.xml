@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Transpernt"
+    android:padding="@dimen/widget_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:theme="@style/ThemeOverlay.WetherForecastApp.AppWidgetContainer">
+    <ImageView
+        android:id="@+id/dec_icon"
+        android:layout_marginTop="10dp"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_app"
+        android:textAlignment="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/homeCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/noto_sans"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:text="Africa/Cairo" />
+        <TextView
+            android:id="@+id/homeTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_marginStart="7dp"
+            tools:text="50°" />
+        <TextView
+            android:id="@+id/homeDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:layout_marginStart="7dp"
+            android:fontFamily="@font/noto_sans"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            tools:text="Mostly cloudy" />
+    </LinearLayout>
+
+
+    <!--TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/appWidgetBackgroundColor"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        android:textColor="?attr/appWidgetTextColor"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" /-->
+
+</LinearLayout>

@@ -84,5 +84,7 @@
     <string name="empty_time">Time is empty</string>
     <string name="Notification_title">Notifications</string>
     <string name="notification_symmary">Show Current Weather as notification</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>
